@@ -1,0 +1,31 @@
+{
+    "app": {
+        "name": "كونتي ستوك"
+    },
+    "nav": {
+        "dashboard": "لوحة التحكم",
+        "settings": "الإعدادات",
+        "profile": "الملف الشخصي",
+        "logout": "تسجيل الخروج"
+    },
+    "auth": {
+        "login": "تسجيل الدخول",
+        "register": "التسجيل",
+        "email": "البريد الإلكتروني",
+        "password": "كلمة المرور",
+        "confirm_password": "تأكيد كلمة المرور",
+        "remember_me": "تذكرني",
+        "forgot_password": "نسيت كلمة المرور؟",
+        "already_registered": "مسجل بالفعل؟",
+        "name": "الاسم"
+    },
+    "dashboard": {
+        "welcome": "مرحباً بك في كونتي ستوك",
+        "subtitle": "أنت مسجل الدخول!"
+    },
+    "settings": {
+        "title": "الإعدادات",
+        "language": "اللغة",
+        "profile_shortcut": "تعديل الملف الشخصي"
+    }
+}
