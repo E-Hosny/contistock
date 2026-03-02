@@ -1,7 +1,13 @@
 <script setup>
+import { watch, computed } from 'vue';
+import { Link, usePage } from '@inertiajs/vue3';
+import { setLocale } from '@/i18n';
 import ApplicationLogo from '@/Components/ApplicationLogo.vue';
 import LanguageSwitcher from '@/Components/LanguageSwitcher.vue';
-import { Link } from '@inertiajs/vue3';
+
+const page = usePage();
+const locale = computed(() => page.props.locale || 'en');
+watch(locale, (val) => setLocale(val || 'en'), { immediate: true });
 </script>
 
 <template>

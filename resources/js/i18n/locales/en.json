@@ -4,6 +4,14 @@
     },
     "nav": {
         "dashboard": "Dashboard",
+        "suppliers": "Suppliers",
+        "containers": "Containers",
+        "warehouse_receipts": "Warehouse Receipts",
+        "products": "Products",
+        "stock": "Stock",
+        "customers": "Customers",
+        "sales": "Sales",
+        "reports": "Reports",
         "settings": "Settings",
         "profile": "Profile",
         "logout": "Log Out"
@@ -21,11 +29,132 @@
     },
     "dashboard": {
         "welcome": "Welcome to ContiStock",
-        "subtitle": "You're logged in!"
+        "subtitle": "You're logged in!",
+        "suppliers_balance": "Suppliers Balance",
+        "customers_balance": "Customers Balance",
+        "inventory_value": "Inventory Value",
+        "total_profit": "Total Profit"
     },
     "settings": {
         "title": "Settings",
         "language": "Language",
         "profile_shortcut": "Edit your profile"
+    },
+    "common": {
+        "add": "Add",
+        "edit": "Edit",
+        "save": "Save",
+        "update": "Update",
+        "cancel": "Cancel",
+        "delete": "Delete",
+        "view": "View",
+        "search": "Search",
+        "filter": "Filter",
+        "actions": "Actions",
+        "select": "Select",
+        "no_data": "No data",
+        "none": "None",
+        "phone": "Phone",
+        "email": "Email",
+        "address": "Address",
+        "notes": "Notes",
+        "status": "Status",
+        "date": "Date",
+        "amount": "Amount",
+        "method": "Method",
+        "total": "Total",
+        "subtotal": "Subtotal",
+        "paid": "Paid",
+        "remaining": "Remaining",
+        "supplier": "Supplier",
+        "container": "Container",
+        "product": "Product",
+        "customer": "Customer",
+        "qty": "Qty",
+        "unit_price": "Unit price",
+        "buy_price": "Buy price",
+        "sale_price": "Sale price",
+        "receipt_date": "Receipt date",
+        "invoice_no": "Invoice no",
+        "discount": "Discount",
+        "received_by": "Received by",
+        "payment_history": "Payment history",
+        "add_payment": "Add payment",
+        "record_payment": "Record payment",
+        "total_cost": "Total cost",
+        "items": "Items",
+        "add_row": "Add row",
+        "remove": "Remove",
+        "profit_per_unit": "Profit/unit",
+        "buy": "Buy",
+        "sale": "Sale",
+        "available_qty": "Available qty",
+        "all_containers": "All containers",
+        "back_to_container": "Back to container",
+        "back_to_sale": "Back to sale",
+        "supplier_payments": "Supplier payments",
+        "warehouse_receipts": "Warehouse receipts",
+        "no_payments": "No payments",
+        "containers_count": "Containers",
+        "sales_count": "Sales",
+        "total_sales": "Total sales",
+        "total_paid": "Total paid",
+        "balance": "Balance",
+        "cash": "Cash",
+        "bank": "Bank",
+        "receipt_items": "Receipt items",
+        "sold_profit": "Sold profit",
+        "expected_profit": "Expected profit",
+        "new_sale": "New Sale",
+        "new_receipt": "New receipt",
+        "create_receipt": "Create receipt",
+        "confirm": "Confirm",
+        "cancel_sale": "Cancel sale",
+        "payments": "Payments"
+    },
+    "pages": {
+        "suppliers": {
+            "new": "New Supplier",
+            "edit": "Edit Supplier",
+            "no_suppliers": "No suppliers yet."
+        },
+        "containers": {
+            "new": "New Container",
+            "edit": "Edit Container",
+            "product_name": "Product / Container name",
+            "receive_to_warehouse": "Receive to warehouse",
+            "no_containers": "No containers yet."
+        },
+        "products": {
+            "new": "New Product",
+            "edit": "Edit Product",
+            "sku": "SKU",
+            "no_products": "No products yet."
+        },
+        "customers": {
+            "new": "New Customer",
+            "edit": "Edit Customer",
+            "no_customers": "No customers yet.",
+            "no_sales": "No sales"
+        },
+        "sales": {
+            "new": "New Sale",
+            "edit": "Edit Sale",
+            "create_sale": "Create Sale",
+            "no_sales": "No sales yet."
+        },
+        "warehouse_receipts": {
+            "new": "New Warehouse Receipt",
+            "no_receipts": "No receipts yet."
+        },
+        "stock": {
+            "no_stock": "No stock data."
+        },
+        "reports": {
+            "container_summary": "Container summary",
+            "customer_balance": "Customer balance report",
+            "supplier_balance": "Supplier balance report",
+            "profit_report": "Profit report"
+        }
     }
 }

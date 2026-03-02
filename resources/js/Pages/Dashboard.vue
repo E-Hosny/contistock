@@ -1,8 +1,13 @@
 <script setup>
-import { Head } from '@inertiajs/vue3';
+import { Head, Link } from '@inertiajs/vue3';
 import DashboardLayout from '@/Layouts/DashboardLayout.vue';
 import Card from '@/Components/Card.vue';
-import Badge from '@/Components/Badge.vue';
+
+const props = defineProps({
+    stats: { type: Object, default: () => ({}) },
+    supplierBalances: { type: Array, default: () => [] },
+    customerBalances: { type: Array, default: () => [] },
+});
 </script>
 
 <template>
@@ -23,20 +28,51 @@ import Badge from '@/Components/Badge.vue';
                 <p class="mt-1 text-gray-600">{{ $t('dashboard.subtitle') }}</p>
             </div>
 
-            <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
                 <Card>
-                    <template #title>Placeholder 1</template>
-                    <p class="text-sm text-gray-500">Content placeholder.</p>
-                    <Badge variant="accent" class="mt-2">New</Badge>
+                    <template #title>{{ $t('dashboard.suppliers_balance') }}</template>
+                    <p class="text-2xl font-semibold text-gray-800">{{ stats.suppliers_balance ?? 0 }}</p>
                 </Card>
                 <Card>
-                    <template #title>Placeholder 2</template>
-                    <p class="text-sm text-gray-500">Content placeholder.</p>
+                    <template #title>{{ $t('dashboard.customers_balance') }}</template>
+                    <p class="text-2xl font-semibold text-gray-800">{{ stats.customers_balance ?? 0 }}</p>
                 </Card>
                 <Card>
-                    <template #title>Placeholder 3</template>
-                    <p class="text-sm text-gray-500">Content placeholder.</p>
-                    <Badge variant="success" class="mt-2">Active</Badge>
+                    <template #title>{{ $t('dashboard.inventory_value') }}</template>
+                    <p class="text-2xl font-semibold text-gray-800">{{ stats.inventory_value ?? 0 }}</p>
+                </Card>
+                <Card>
+                    <template #title>{{ $t('dashboard.total_profit') }}</template>
+                    <p class="text-2xl font-semibold text-gray-800">{{ stats.total_profit ?? 0 }}</p>
+                </Card>
+            </div>
+
+            <div class="grid gap-4 lg:grid-cols-2">
+                <Card>
+                    <template #title>
+                        <Link :href="route('reports.supplier-balance')" class="hover:underline">
+                            {{ $t('dashboard.suppliers_balance') }} ({{ supplierBalances.length }})
+                        </Link>
+                    </template>
+                    <ul class="space-y-1 text-sm text-gray-600">
+                        <li v-for="b in supplierBalances" :key="b.supplier?.id">
+                            {{ b.supplier?.name }}: {{ b.balance }}
+                        </li>
+                        <li v-if="!supplierBalances.length">{{ $t('common.no_data') }}</li>
+                    </ul>
+                </Card>
+                <Card>
+                    <template #title>
+                        <Link :href="route('reports.customer-balance')" class="hover:underline">
+                            {{ $t('dashboard.customers_balance') }} ({{ customerBalances.length }})
+                        </Link>
+                    </template>
+                    <ul class="space-y-1 text-sm text-gray-600">
+                        <li v-for="b in customerBalances" :key="b.customer?.id">
+                            {{ b.customer?.name }}: {{ b.balance }}
+                        </li>
+                        <li v-if="!customerBalances.length">{{ $t('common.no_data') }}</li>
+                    </ul>
                 </Card>
             </div>
         </div>

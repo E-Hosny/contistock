@@ -4,6 +4,14 @@
     },
     "nav": {
         "dashboard": "لوحة التحكم",
+        "suppliers": "الموردون",
+        "containers": "الحاويات",
+        "warehouse_receipts": "استلام المخزن",
+        "products": "الأصناف",
+        "stock": "المخزون",
+        "customers": "العملاء",
+        "sales": "المبيعات",
+        "reports": "التقارير",
         "settings": "الإعدادات",
         "profile": "الملف الشخصي",
         "logout": "تسجيل الخروج"
@@ -21,11 +29,132 @@
     },
     "dashboard": {
         "welcome": "مرحباً بك في كونتي ستوك",
-        "subtitle": "أنت مسجل الدخول!"
+        "subtitle": "أنت مسجل الدخول!",
+        "suppliers_balance": "رصيد الموردين",
+        "customers_balance": "رصيد العملاء",
+        "inventory_value": "قيمة المخزون",
+        "total_profit": "إجمالي الأرباح"
     },
     "settings": {
         "title": "الإعدادات",
         "language": "اللغة",
         "profile_shortcut": "تعديل الملف الشخصي"
+    },
+    "common": {
+        "add": "إضافة",
+        "edit": "تعديل",
+        "save": "حفظ",
+        "update": "تحديث",
+        "cancel": "إلغاء",
+        "delete": "حذف",
+        "view": "عرض",
+        "search": "بحث",
+        "filter": "تصفية",
+        "actions": "إجراءات",
+        "select": "اختر",
+        "no_data": "لا توجد بيانات",
+        "none": "لا شيء",
+        "phone": "الهاتف",
+        "email": "البريد الإلكتروني",
+        "address": "العنوان",
+        "notes": "ملاحظات",
+        "status": "الحالة",
+        "date": "التاريخ",
+        "amount": "المبلغ",
+        "method": "طريقة الدفع",
+        "total": "الإجمالي",
+        "subtotal": "المجموع الفرعي",
+        "paid": "المدفوع",
+        "remaining": "المتبقي",
+        "supplier": "المورد",
+        "container": "الحاوية",
+        "product": "المنتج",
+        "customer": "العميل",
+        "qty": "الكمية",
+        "unit_price": "سعر الوحدة",
+        "buy_price": "سعر الشراء",
+        "sale_price": "سعر البيع",
+        "receipt_date": "تاريخ الاستلام",
+        "invoice_no": "رقم الفاتورة",
+        "discount": "الخصم",
+        "received_by": "استلم بواسطة",
+        "payment_history": "سجل الدفعات",
+        "add_payment": "إضافة دفعة",
+        "record_payment": "تسجيل الدفعة",
+        "total_cost": "التكلفة الإجمالية",
+        "items": "البنود",
+        "add_row": "إضافة صف",
+        "remove": "إزالة",
+        "profit_per_unit": "الربح/وحدة",
+        "buy": "شراء",
+        "sale": "بيع",
+        "available_qty": "الكمية المتاحة",
+        "all_containers": "كل الحاويات",
+        "back_to_container": "العودة للحاوية",
+        "back_to_sale": "العودة للفاتورة",
+        "supplier_payments": "دفعات المورد",
+        "warehouse_receipts": "استلام المخزن",
+        "no_payments": "لا توجد دفعات",
+        "containers_count": "الحاويات",
+        "sales_count": "المبيعات",
+        "total_sales": "إجمالي المبيعات",
+        "total_paid": "إجمالي المدفوع",
+        "balance": "الرصيد",
+        "cash": "نقدي",
+        "bank": "بنك",
+        "receipt_items": "بنود الاستلام",
+        "sold_profit": "ربح المبيع",
+        "expected_profit": "الربح المتوقع",
+        "new_sale": "فاتورة جديدة",
+        "new_receipt": "استلام جديد",
+        "create_receipt": "إنشاء استلام",
+        "confirm": "تأكيد",
+        "cancel_sale": "إلغاء الفاتورة",
+        "payments": "الدفعات"
+    },
+    "pages": {
+        "suppliers": {
+            "new": "مورد جديد",
+            "edit": "تعديل المورد",
+            "no_suppliers": "لا يوجد موردون بعد."
+        },
+        "containers": {
+            "new": "حاوية جديدة",
+            "edit": "تعديل الحاوية",
+            "product_name": "المنتج / اسم الحاوية",
+            "receive_to_warehouse": "استلام للمخزن",
+            "no_containers": "لا توجد حاويات بعد."
+        },
+        "products": {
+            "new": "منتج جديد",
+            "edit": "تعديل المنتج",
+            "sku": "رمز المنتج",
+            "no_products": "لا توجد أصناف بعد."
+        },
+        "customers": {
+            "new": "عميل جديد",
+            "edit": "تعديل العميل",
+            "no_customers": "لا يوجد عملاء بعد.",
+            "no_sales": "لا توجد مبيعات"
+        },
+        "sales": {
+            "new": "فاتورة جديدة",
+            "edit": "تعديل الفاتورة",
+            "create_sale": "إنشاء فاتورة",
+            "no_sales": "لا توجد مبيعات بعد."
+        },
+        "warehouse_receipts": {
+            "new": "استلام مخزن جديد",
+            "no_receipts": "لا توجد استلامات بعد."
+        },
+        "stock": {
+            "no_stock": "لا توجد بيانات مخزون."
+        },
+        "reports": {
+            "container_summary": "ملخص الحاوية",
+            "customer_balance": "تقرير رصيد العملاء",
+            "supplier_balance": "تقرير رصيد الموردين",
+            "profit_report": "تقرير الأرباح"
+        }
     }
 }
