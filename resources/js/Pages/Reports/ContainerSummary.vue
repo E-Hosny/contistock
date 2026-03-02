@@ -23,14 +23,14 @@ defineProps({ summary: Object });
             </Card>
             <Card>
                 <template #title>{{ $t('common.receipt_items') }}</template>
-                <table class="min-w-full">
-                    <thead><tr><th class="text-left text-xs text-gray-500">{{ $t('common.product') }}</th><th class="text-left text-xs text-gray-500">{{ $t('common.qty') }}</th><th class="text-left text-xs text-gray-500">{{ $t('common.buy') }}</th><th class="text-left text-xs text-gray-500">{{ $t('common.sale') }}</th></tr></thead>
-                    <tbody>
-                        <tr v-for="item in summary?.receipt_items" :key="item.id" class="border-t">
-                            <td class="py-1">{{ item.product?.name }}</td>
-                            <td class="py-1">{{ item.qty_received }}</td>
-                            <td class="py-1">{{ item.buy_price }}</td>
-                            <td class="py-1">{{ item.sale_price }}</td>
+                <table class="data-table min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50"><tr><th class="px-4 py-2 text-xs font-medium text-gray-500">{{ $t('common.product') }}</th><th class="px-4 py-2 text-xs font-medium text-gray-500">{{ $t('common.qty') }}</th><th class="px-4 py-2 text-xs font-medium text-gray-500">{{ $t('common.buy') }}</th><th class="px-4 py-2 text-xs font-medium text-gray-500">{{ $t('common.sale') }}</th></tr></thead>
+                    <tbody class="divide-y divide-gray-200 bg-white">
+                        <tr v-for="item in summary?.receipt_items" :key="item.id">
+                            <td class="px-4 py-2">{{ item.product?.name }}</td>
+                            <td class="px-4 py-2">{{ item.qty_received }}</td>
+                            <td class="px-4 py-2">{{ item.buy_price }}</td>
+                            <td class="px-4 py-2">{{ item.sale_price }}</td>
                         </tr>
                     </tbody>
                 </table>

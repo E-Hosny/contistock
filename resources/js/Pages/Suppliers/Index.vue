@@ -21,13 +21,13 @@ const props = defineProps({
         </template>
         <div class="space-y-4">
             <Card>
-                <table class="min-w-full divide-y divide-gray-200">
+                <table class="data-table min-w-full divide-y divide-gray-200">
                     <thead class="bg-gray-50">
                         <tr>
-                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500">{{ $t('auth.name') }}</th>
-                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500">{{ $t('common.phone') }}</th>
-                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500">{{ $t('common.containers_count') }}</th>
-                            <th class="px-4 py-2 text-right text-xs font-medium text-gray-500">{{ $t('common.actions') }}</th>
+                            <th class="px-4 py-2 text-xs font-medium text-gray-500">{{ $t('auth.name') }}</th>
+                            <th class="px-4 py-2 text-xs font-medium text-gray-500">{{ $t('common.phone') }}</th>
+                            <th class="px-4 py-2 text-xs font-medium text-gray-500">{{ $t('common.containers_count') }}</th>
+                            <th class="px-4 py-2 text-xs font-medium text-gray-500">{{ $t('common.actions') }}</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-200 bg-white">
@@ -37,7 +37,7 @@ const props = defineProps({
                             </td>
                             <td class="px-4 py-2 text-sm text-gray-600">{{ s.phone }}</td>
                             <td class="px-4 py-2 text-sm">{{ s.containers_count }}</td>
-                            <td class="px-4 py-2 text-right">
+                            <td class="px-4 py-2">
                                 <Link :href="route('suppliers.edit', s.id)" class="text-sm text-blue-600 hover:underline">{{ $t('common.edit') }}</Link>
                             </td>
                         </tr>

@@ -21,12 +21,12 @@ const props = defineProps({ stock: Array, containers: Array, filterContainerId: 
                 <button type="submit" class="rounded bg-gray-200 px-3 py-1">{{ $t('common.filter') }}</button>
             </form>
             <Card>
-                <table class="min-w-full divide-y divide-gray-200">
+                <table class="data-table min-w-full divide-y divide-gray-200">
                     <thead class="bg-gray-50">
                         <tr>
-                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500">{{ $t('common.product') }}</th>
-                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500">{{ $t('pages.products.sku') }}</th>
-                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500">{{ $t('common.available_qty') }}</th>
+                            <th class="px-4 py-2 text-xs font-medium text-gray-500">{{ $t('common.product') }}</th>
+                            <th class="px-4 py-2 text-xs font-medium text-gray-500">{{ $t('pages.products.sku') }}</th>
+                            <th class="px-4 py-2 text-xs font-medium text-gray-500">{{ $t('common.available_qty') }}</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-200 bg-white">

@@ -17,13 +17,13 @@ defineProps({ customers: Object, filters: Object });
             </div>
         </template>
         <Card>
-            <table class="min-w-full divide-y divide-gray-200">
+            <table class="data-table min-w-full divide-y divide-gray-200">
                 <thead class="bg-gray-50">
                     <tr>
-                        <th class="px-4 py-2 text-left text-xs font-medium text-gray-500">{{ $t('auth.name') }}</th>
-                        <th class="px-4 py-2 text-left text-xs font-medium text-gray-500">{{ $t('common.phone') }}</th>
-                        <th class="px-4 py-2 text-left text-xs font-medium text-gray-500">{{ $t('nav.sales') }}</th>
-                        <th class="px-4 py-2 text-right text-xs font-medium text-gray-500">{{ $t('common.actions') }}</th>
+                        <th class="px-4 py-2 text-xs font-medium text-gray-500">{{ $t('auth.name') }}</th>
+                        <th class="px-4 py-2 text-xs font-medium text-gray-500">{{ $t('common.phone') }}</th>
+                        <th class="px-4 py-2 text-xs font-medium text-gray-500">{{ $t('nav.sales') }}</th>
+                        <th class="px-4 py-2 text-xs font-medium text-gray-500">{{ $t('common.actions') }}</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-200 bg-white">
@@ -33,7 +33,7 @@ defineProps({ customers: Object, filters: Object });
                         </td>
                         <td class="px-4 py-2 text-sm">{{ c.phone }}</td>
                         <td class="px-4 py-2 text-sm">{{ c.sales_count }}</td>
-                        <td class="px-4 py-2 text-right">
+                        <td class="px-4 py-2">
                             <Link :href="route('customers.edit', c.id)" class="text-sm text-blue-600 hover:underline">{{ $t('common.edit') }}</Link>
                         </td>
                     </tr>

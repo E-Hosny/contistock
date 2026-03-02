@@ -45,15 +45,15 @@ const cancelForm = useForm({});
             </Card>
             <Card>
                 <template #title>{{ $t('common.items') }}</template>
-                <table class="min-w-full">
-                    <thead><tr><th class="text-left text-xs text-gray-500">{{ $t('common.product') }}</th><th class="text-left text-xs text-gray-500">{{ $t('common.qty') }}</th><th class="text-left text-xs text-gray-500">{{ $t('common.unit_price') }}</th><th class="text-left text-xs text-gray-500">{{ $t('common.total') }}</th><th class="text-left text-xs text-gray-500">{{ $t('common.sold_profit') }}</th></tr></thead>
-                    <tbody>
-                        <tr v-for="item in sale?.sale_items" :key="item.id" class="border-t">
-                            <td class="py-1">{{ item.product?.name }}</td>
-                            <td class="py-1">{{ item.qty }}</td>
-                            <td class="py-1">{{ item.unit_price }}</td>
-                            <td class="py-1">{{ item.line_total }}</td>
-                            <td class="py-1">{{ item.profit_line }}</td>
+                <table class="data-table min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50"><tr><th class="px-4 py-2 text-xs font-medium text-gray-500">{{ $t('common.product') }}</th><th class="px-4 py-2 text-xs font-medium text-gray-500">{{ $t('common.qty') }}</th><th class="px-4 py-2 text-xs font-medium text-gray-500">{{ $t('common.unit_price') }}</th><th class="px-4 py-2 text-xs font-medium text-gray-500">{{ $t('common.total') }}</th><th class="px-4 py-2 text-xs font-medium text-gray-500">{{ $t('common.sold_profit') }}</th></tr></thead>
+                    <tbody class="divide-y divide-gray-200 bg-white">
+                        <tr v-for="item in sale?.sale_items" :key="item.id">
+                            <td class="px-4 py-2">{{ item.product?.name }}</td>
+                            <td class="px-4 py-2">{{ item.qty }}</td>
+                            <td class="px-4 py-2">{{ item.unit_price }}</td>
+                            <td class="px-4 py-2">{{ item.line_total }}</td>
+                            <td class="px-4 py-2">{{ item.profit_line }}</td>
                         </tr>
                     </tbody>
                 </table>

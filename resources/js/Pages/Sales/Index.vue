@@ -18,15 +18,15 @@ defineProps({ sales: Object, filters: Object });
             </div>
         </template>
         <Card>
-            <table class="min-w-full divide-y divide-gray-200">
+            <table class="data-table min-w-full divide-y divide-gray-200">
                 <thead class="bg-gray-50">
                     <tr>
-                        <th class="px-4 py-2 text-left text-xs font-medium text-gray-500">{{ $t('common.date') }}</th>
-                        <th class="px-4 py-2 text-left text-xs font-medium text-gray-500">{{ $t('common.customer') }}</th>
-                        <th class="px-4 py-2 text-left text-xs font-medium text-gray-500">{{ $t('common.total') }}</th>
-                        <th class="px-4 py-2 text-left text-xs font-medium text-gray-500">{{ $t('common.paid') }}</th>
-                        <th class="px-4 py-2 text-left text-xs font-medium text-gray-500">{{ $t('common.status') }}</th>
-                        <th class="px-4 py-2 text-right text-xs font-medium text-gray-500">{{ $t('common.actions') }}</th>
+                        <th class="px-4 py-2 text-xs font-medium text-gray-500">{{ $t('common.date') }}</th>
+                        <th class="px-4 py-2 text-xs font-medium text-gray-500">{{ $t('common.customer') }}</th>
+                        <th class="px-4 py-2 text-xs font-medium text-gray-500">{{ $t('common.total') }}</th>
+                        <th class="px-4 py-2 text-xs font-medium text-gray-500">{{ $t('common.paid') }}</th>
+                        <th class="px-4 py-2 text-xs font-medium text-gray-500">{{ $t('common.status') }}</th>
+                        <th class="px-4 py-2 text-xs font-medium text-gray-500">{{ $t('common.actions') }}</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-200 bg-white">
@@ -36,7 +36,7 @@ defineProps({ sales: Object, filters: Object });
                         <td class="px-4 py-2">{{ s.total }}</td>
                         <td class="px-4 py-2">{{ s.paid_amount }}</td>
                         <td class="px-4 py-2"><Badge>{{ s.status }}</Badge></td>
-                        <td class="px-4 py-2 text-right">
+                        <td class="px-4 py-2">
                             <Link :href="route('sales.show', s.id)" class="text-sm text-blue-600 hover:underline">{{ $t('common.view') }}</Link>
                         </td>
                     </tr>

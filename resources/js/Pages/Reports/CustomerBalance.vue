@@ -13,13 +13,13 @@ defineProps({ balances: Array });
             <h2 class="text-xl font-semibold text-gray-800">{{ $t('pages.reports.customer_balance') }}</h2>
         </template>
         <Card>
-            <table class="min-w-full divide-y divide-gray-200">
+            <table class="data-table min-w-full divide-y divide-gray-200">
                 <thead class="bg-gray-50">
                     <tr>
-                        <th class="px-4 py-2 text-left text-xs font-medium text-gray-500">{{ $t('common.customer') }}</th>
-                        <th class="px-4 py-2 text-left text-xs font-medium text-gray-500">{{ $t('common.total_sales') }}</th>
-                        <th class="px-4 py-2 text-left text-xs font-medium text-gray-500">{{ $t('common.total_paid') }}</th>
-                        <th class="px-4 py-2 text-left text-xs font-medium text-gray-500">{{ $t('common.balance') }}</th>
+                        <th class="px-4 py-2 text-xs font-medium text-gray-500">{{ $t('common.customer') }}</th>
+                        <th class="px-4 py-2 text-xs font-medium text-gray-500">{{ $t('common.total_sales') }}</th>
+                        <th class="px-4 py-2 text-xs font-medium text-gray-500">{{ $t('common.total_paid') }}</th>
+                        <th class="px-4 py-2 text-xs font-medium text-gray-500">{{ $t('common.balance') }}</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-200 bg-white">

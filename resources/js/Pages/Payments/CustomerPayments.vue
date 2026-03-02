@@ -58,14 +58,14 @@ const form = useForm({
             </Card>
             <Card>
                 <template #title>{{ $t('common.payment_history') }}</template>
-                <table class="min-w-full">
-                    <thead><tr><th class="text-left text-xs text-gray-500">{{ $t('common.date') }}</th><th class="text-left text-xs text-gray-500">{{ $t('common.amount') }}</th><th class="text-left text-xs text-gray-500">{{ $t('common.method') }}</th><th></th></tr></thead>
-                    <tbody>
-                        <tr v-for="p in sale?.customer_payments" :key="p.id" class="border-t">
-                            <td class="py-1">{{ p.payment_date }}</td>
-                            <td class="py-1">{{ p.amount }}</td>
-                            <td class="py-1">{{ p.method }}</td>
-                            <td class="py-1">
+                <table class="data-table min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50"><tr><th class="px-4 py-2 text-xs font-medium text-gray-500">{{ $t('common.date') }}</th><th class="px-4 py-2 text-xs font-medium text-gray-500">{{ $t('common.amount') }}</th><th class="px-4 py-2 text-xs font-medium text-gray-500">{{ $t('common.method') }}</th><th class="px-4 py-2 text-xs font-medium text-gray-500">{{ $t('common.actions') }}</th></tr></thead>
+                    <tbody class="divide-y divide-gray-200 bg-white">
+                        <tr v-for="p in sale?.customer_payments" :key="p.id">
+                            <td class="px-4 py-2">{{ p.payment_date }}</td>
+                            <td class="px-4 py-2">{{ p.amount }}</td>
+                            <td class="px-4 py-2">{{ p.method }}</td>
+                            <td class="px-4 py-2">
                                 <form @submit.prevent="router.delete(route('customer-payments.destroy', p.id))" class="inline">
                                     <button type="submit" class="text-sm text-red-600">{{ $t('common.delete') }}</button>
                                 </form>
@@ -73,6 +73,7 @@ const form = useForm({
                         </tr>
                     </tbody>
                 </table>
+                <div v-if="!sale?.customer_payments?.length" class="p-4 text-center text-gray-500">{{ $t('common.no_payments') }}</div>
             </Card>
         </div>
     </DashboardLayout>

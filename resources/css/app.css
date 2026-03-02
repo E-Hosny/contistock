@@ -10,3 +10,11 @@
         font-family: 'Cairo', 'Tajawal', ui-sans-serif, system-ui, sans-serif;
     }
 }
+
+/* توحيد محاذاة رؤوس الجداول والمحتوى (LTR و RTL) */
+@layer components {
+    .data-table th,
+    .data-table td {
+        text-align: center;
+    }
+}

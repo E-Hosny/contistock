@@ -17,19 +17,19 @@ defineProps({ products: Object, filters: Object });
             </div>
         </template>
         <Card>
-            <table class="min-w-full divide-y divide-gray-200">
+            <table class="data-table min-w-full divide-y divide-gray-200">
                 <thead class="bg-gray-50">
                     <tr>
-                        <th class="px-4 py-2 text-left text-xs font-medium text-gray-500">{{ $t('auth.name') }}</th>
-                        <th class="px-4 py-2 text-left text-xs font-medium text-gray-500">{{ $t('pages.products.sku') }}</th>
-                        <th class="px-4 py-2 text-right text-xs font-medium text-gray-500">{{ $t('common.actions') }}</th>
+                        <th class="px-4 py-2 text-xs font-medium text-gray-500">{{ $t('auth.name') }}</th>
+                        <th class="px-4 py-2 text-xs font-medium text-gray-500">{{ $t('pages.products.sku') }}</th>
+                        <th class="px-4 py-2 text-xs font-medium text-gray-500">{{ $t('common.actions') }}</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-200 bg-white">
                     <tr v-for="p in products.data" :key="p.id">
                         <td class="px-4 py-2">{{ p.name }}</td>
                         <td class="px-4 py-2 text-sm">{{ p.sku }}</td>
-                        <td class="px-4 py-2 text-right">
+                        <td class="px-4 py-2">
                             <Link :href="route('products.edit', p.id)" class="text-sm text-blue-600 hover:underline">{{ $t('common.edit') }}</Link>
                         </td>
                     </tr>
