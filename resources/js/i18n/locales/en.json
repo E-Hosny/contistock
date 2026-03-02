@@ -79,6 +79,7 @@
         "discount": "Discount",
         "received_by": "Received by",
         "payment_history": "Payment history",
+        "financial_summary": "Financial summary",
         "add_payment": "Add payment",
         "record_payment": "Record payment",
         "total_cost": "Total cost",

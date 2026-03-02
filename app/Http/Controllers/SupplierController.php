@@ -46,10 +46,17 @@ class SupplierController extends Controller
     {
         $this->authorize('view', $supplier);
 
-        $supplier->load(['containers' => fn ($q) => $q->withSum('supplierPayments', 'amount')]);
+        $supplier->load(['containers' => fn ($q) => $q->withSum('supplierPayments', 'amount')->with('supplierPayments')]);
+
+        $supplierTotalCost = $supplier->containers->sum('total_cost');
+        $supplierPaidAmount = $supplier->containers->sum(fn ($c) => (float) ($c->supplier_payments_sum_amount ?? 0));
+        $supplierRemainingAmount = max(0, $supplierTotalCost - $supplierPaidAmount);
 
         return Inertia::render('Suppliers/Show', [
             'supplier' => $supplier,
+            'supplier_total_cost' => $supplierTotalCost,
+            'supplier_paid_amount' => $supplierPaidAmount,
+            'supplier_remaining_amount' => $supplierRemainingAmount,
         ]);
     }
 

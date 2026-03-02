@@ -79,6 +79,7 @@
         "discount": "الخصم",
         "received_by": "استلم بواسطة",
         "payment_history": "سجل الدفعات",
+        "financial_summary": "الملخص المالي",
         "add_payment": "إضافة دفعة",
         "record_payment": "تسجيل الدفعة",
         "total_cost": "التكلفة الإجمالية",

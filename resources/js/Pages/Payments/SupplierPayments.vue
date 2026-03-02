@@ -5,7 +5,6 @@ import Card from '@/Components/Card.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import TextInput from '@/Components/TextInput.vue';
-import DangerButton from '@/Components/DangerButton.vue';
 
 const props = defineProps({ container: Object });
 
