@@ -37,7 +37,7 @@ const props = defineProps({ containers: Object, filters: Object });
                         <td class="px-4 py-2 text-sm">{{ c.supplier?.name }}</td>
                         <td class="px-4 py-2 text-sm">{{ c.total_cost }}</td>
                         <td class="px-4 py-2 text-sm">{{ c.paid_amount }}</td>
-                        <td class="px-4 py-2"><Badge>{{ c.status }}</Badge></td>
+                        <td class="px-4 py-2"><Badge>{{ $t('statusOptions.' + (c.status || 'draft')) }}</Badge></td>
                         <td class="px-4 py-2">
                             <Link :href="route('containers.edit', c.id)" class="text-sm text-blue-600 hover:underline">{{ $t('common.edit') }}</Link>
                         </td>

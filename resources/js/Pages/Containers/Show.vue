@@ -24,7 +24,7 @@ const props = defineProps({ container: Object });
             <Card>
                 <dl class="grid gap-2 sm:grid-cols-2">
                     <div><dt class="text-sm text-gray-500">{{ $t('common.supplier') }}</dt><dd>{{ container?.supplier?.name }}</dd></div>
-                    <div><dt class="text-sm text-gray-500">{{ $t('common.status') }}</dt><dd><Badge>{{ container?.status }}</Badge></dd></div>
+                    <div><dt class="text-sm text-gray-500">{{ $t('common.status') }}</dt><dd><Badge>{{ $t('statusOptions.' + (container?.status || 'draft')) }}</Badge></dd></div>
                 </dl>
             </Card>
             <Card>

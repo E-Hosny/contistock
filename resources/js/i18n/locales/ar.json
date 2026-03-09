@@ -40,6 +40,16 @@
         "language": "اللغة",
         "profile_shortcut": "تعديل الملف الشخصي"
     },
+    "statusOptions": {
+        "draft": "مسودة",
+        "purchased": "تم الشراء",
+        "received_to_warehouse": "مستلم بالمخزن",
+        "closed": "مغلق",
+        "confirmed": "مؤكد",
+        "cancelled": "ملغي",
+        "active": "نشط",
+        "inactive": "غير نشط"
+    },
     "common": {
         "add": "إضافة",
         "edit": "تعديل",

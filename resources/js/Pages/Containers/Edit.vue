@@ -44,10 +44,10 @@ const form = useForm({
             <div>
                 <InputLabel for="status" :value="$t('common.status')" />
                 <select id="status" v-model="form.status" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
-                    <option value="draft">Draft</option>
-                    <option value="purchased">Purchased</option>
-                    <option value="received_to_warehouse">Received</option>
-                    <option value="closed">Closed</option>
+                    <option value="draft">{{ $t('statusOptions.draft') }}</option>
+                    <option value="purchased">{{ $t('statusOptions.purchased') }}</option>
+                    <option value="received_to_warehouse">{{ $t('statusOptions.received_to_warehouse') }}</option>
+                    <option value="closed">{{ $t('statusOptions.closed') }}</option>
                 </select>
             </div>
             <div class="flex gap-2">

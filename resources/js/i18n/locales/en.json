@@ -40,6 +40,16 @@
         "language": "Language",
         "profile_shortcut": "Edit your profile"
     },
+    "statusOptions": {
+        "draft": "Draft",
+        "purchased": "Purchased",
+        "received_to_warehouse": "Received",
+        "closed": "Closed",
+        "confirmed": "Confirmed",
+        "cancelled": "Cancelled",
+        "active": "Active",
+        "inactive": "Inactive"
+    },
     "common": {
         "add": "Add",
         "edit": "Edit",

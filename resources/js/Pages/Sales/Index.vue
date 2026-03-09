@@ -37,7 +37,7 @@ defineProps({ sales: Object, filters: Object });
                         <td class="px-4 py-2">{{ s.total }}</td>
                         <td class="px-4 py-2">{{ s.paid_amount }}</td>
                         <td class="px-4 py-2">{{ s.remaining_amount }}</td>
-                        <td class="px-4 py-2"><Badge>{{ s.status }}</Badge></td>
+                        <td class="px-4 py-2"><Badge>{{ $t('statusOptions.' + (s.status || 'draft')) }}</Badge></td>
                         <td class="px-4 py-2">
                             <Link :href="route('sales.show', s.id)" class="text-sm text-blue-600 hover:underline">{{ $t('common.view') }}</Link>
                         </td>
