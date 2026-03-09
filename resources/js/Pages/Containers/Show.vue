@@ -26,6 +26,10 @@ const props = defineProps({ container: Object });
                     <div><dt class="text-sm text-gray-500">{{ $t('common.supplier') }}</dt><dd>{{ container?.supplier?.name }}</dd></div>
                     <div><dt class="text-sm text-gray-500">{{ $t('common.status') }}</dt><dd><Badge>{{ $t('statusOptions.' + (container?.status || 'draft')) }}</Badge></dd></div>
                 </dl>
+                <div v-if="container?.description" class="mt-3 border-t border-gray-200 pt-3">
+                    <dt class="text-sm text-gray-500">{{ $t('common.details') }}</dt>
+                    <dd class="mt-1 whitespace-pre-wrap text-gray-900">{{ container.description }}</dd>
+                </div>
             </Card>
             <Card>
                 <template #title>{{ $t('common.financial_summary') }}</template>

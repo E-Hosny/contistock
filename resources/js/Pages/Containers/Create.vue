@@ -45,12 +45,12 @@ const form = useForm({
                 <TextInput id="total_cost" v-model="form.total_cost" type="number" step="0.01" class="mt-1 block w-full" required />
             </div>
             <div>
-                <InputLabel for="purchase_date" :value="$t('common.date')" />
-                <TextInput id="purchase_date" v-model="form.purchase_date" type="date" class="mt-1 block w-full" />
+                <InputLabel for="description" :value="$t('common.details')" />
+                <textarea id="description" v-model="form.description" rows="3" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm" :placeholder="$t('common.details')"></textarea>
             </div>
             <div>
-                <InputLabel for="invoice_ref" value="Invoice ref" />
-                <TextInput id="invoice_ref" v-model="form.invoice_ref" class="mt-1 block w-full" />
+                <InputLabel for="purchase_date" :value="$t('common.date')" />
+                <TextInput id="purchase_date" v-model="form.purchase_date" type="date" class="mt-1 block w-full" />
             </div>
             <div class="flex gap-2">
                 <PrimaryButton type="submit" :disabled="form.processing">{{ $t('common.save') }}</PrimaryButton>

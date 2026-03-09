@@ -68,6 +68,7 @@
         "email": "Email",
         "address": "Address",
         "notes": "Notes",
+        "details": "Details",
         "status": "Status",
         "date": "Date",
         "amount": "Amount",

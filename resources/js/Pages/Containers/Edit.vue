@@ -42,6 +42,10 @@ const form = useForm({
                 <TextInput id="total_cost" v-model="form.total_cost" type="number" step="0.01" class="mt-1 block w-full" required />
             </div>
             <div>
+                <InputLabel for="description" :value="$t('common.details')" />
+                <textarea id="description" v-model="form.description" rows="3" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm" :placeholder="$t('common.details')"></textarea>
+            </div>
+            <div>
                 <InputLabel for="status" :value="$t('common.status')" />
                 <select id="status" v-model="form.status" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
                     <option value="draft">{{ $t('statusOptions.draft') }}</option>
