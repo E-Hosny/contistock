@@ -27,9 +27,9 @@ defineProps({ products: Object, filters: Object });
                 </thead>
                 <tbody class="divide-y divide-gray-200 bg-white">
                     <tr v-for="p in products.data" :key="p.id">
-                        <td class="px-4 py-2">{{ p.name }}</td>
-                        <td class="px-4 py-2 text-sm">{{ p.sku }}</td>
-                        <td class="px-4 py-2">
+                        <td class="px-4 py-2" :data-label="$t('auth.name')">{{ p.name }}</td>
+                        <td class="px-4 py-2 text-sm" :data-label="$t('pages.products.sku')">{{ p.sku }}</td>
+                        <td class="px-4 py-2" :data-label="$t('common.actions')">
                             <Link :href="route('products.edit', p.id)" class="text-sm text-blue-600 hover:underline">{{ $t('common.edit') }}</Link>
                         </td>
                     </tr>

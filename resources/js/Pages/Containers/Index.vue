@@ -31,14 +31,14 @@ const props = defineProps({ containers: Object, filters: Object });
                 </thead>
                 <tbody class="divide-y divide-gray-200 bg-white">
                     <tr v-for="c in containers.data" :key="c.id">
-                        <td class="px-4 py-2">
+                        <td class="px-4 py-2" :data-label="$t('common.product')">
                             <Link :href="route('containers.show', c.id)" class="text-primary-navy hover:underline">{{ c.product_name }}</Link>
                         </td>
-                        <td class="px-4 py-2 text-sm">{{ c.supplier?.name }}</td>
-                        <td class="px-4 py-2 text-sm">{{ c.total_cost }}</td>
-                        <td class="px-4 py-2 text-sm">{{ c.paid_amount }}</td>
-                        <td class="px-4 py-2"><Badge>{{ $t('statusOptions.' + (c.status || 'draft')) }}</Badge></td>
-                        <td class="px-4 py-2">
+                        <td class="px-4 py-2 text-sm" :data-label="$t('common.supplier')">{{ c.supplier?.name }}</td>
+                        <td class="px-4 py-2 text-sm" :data-label="$t('common.total_cost')">{{ c.total_cost }}</td>
+                        <td class="px-4 py-2 text-sm" :data-label="$t('common.paid')">{{ c.paid_amount }}</td>
+                        <td class="px-4 py-2" :data-label="$t('common.status')"><Badge>{{ $t('statusOptions.' + (c.status || 'draft')) }}</Badge></td>
+                        <td class="px-4 py-2" :data-label="$t('common.actions')">
                             <Link :href="route('containers.edit', c.id)" class="text-sm text-blue-600 hover:underline">{{ $t('common.edit') }}</Link>
                         </td>
                     </tr>

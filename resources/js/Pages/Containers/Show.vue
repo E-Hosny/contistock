@@ -61,9 +61,9 @@ const props = defineProps({ container: Object });
                     </thead>
                     <tbody class="divide-y divide-gray-200 bg-white">
                         <tr v-for="p in container?.supplier_payments" :key="p.id">
-                            <td class="px-4 py-2">{{ p.payment_date }}</td>
-                            <td class="px-4 py-2">{{ p.amount }}</td>
-                            <td class="px-4 py-2">{{ p.method }}</td>
+                            <td class="px-4 py-2" :data-label="$t('common.date')">{{ p.payment_date }}</td>
+                            <td class="px-4 py-2" :data-label="$t('common.amount')">{{ p.amount }}</td>
+                            <td class="px-4 py-2" :data-label="$t('common.method')">{{ p.method }}</td>
                         </tr>
                     </tbody>
                 </table>

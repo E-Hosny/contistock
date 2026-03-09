@@ -31,9 +31,9 @@ const props = defineProps({ stock: Array, containers: Array, filterContainerId: 
                     </thead>
                     <tbody class="divide-y divide-gray-200 bg-white">
                         <tr v-for="s in stock" :key="s.product?.id">
-                            <td class="px-4 py-2">{{ s.product?.name }}</td>
-                            <td class="px-4 py-2 text-sm">{{ s.product?.sku }}</td>
-                            <td class="px-4 py-2 font-medium">{{ s.available_qty }}</td>
+                            <td class="px-4 py-2" :data-label="$t('common.product')">{{ s.product?.name }}</td>
+                            <td class="px-4 py-2 text-sm" :data-label="$t('pages.products.sku')">{{ s.product?.sku }}</td>
+                            <td class="px-4 py-2 font-medium" :data-label="$t('common.available_qty')">{{ s.available_qty }}</td>
                         </tr>
                     </tbody>
                 </table>

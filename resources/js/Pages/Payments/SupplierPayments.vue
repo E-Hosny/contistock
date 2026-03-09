@@ -62,12 +62,12 @@ const form = useForm({
                     <thead class="bg-gray-50"><tr><th class="px-4 py-2 text-xs font-medium text-gray-500">{{ $t('common.date') }}</th><th class="px-4 py-2 text-xs font-medium text-gray-500">{{ $t('common.container') }}</th><th class="px-4 py-2 text-xs font-medium text-gray-500">{{ $t('common.amount') }}</th><th class="px-4 py-2 text-xs font-medium text-gray-500">{{ $t('common.remaining') }}</th><th class="px-4 py-2 text-xs font-medium text-gray-500">{{ $t('common.method') }}</th><th class="px-4 py-2 text-xs font-medium text-gray-500">{{ $t('common.actions') }}</th></tr></thead>
                     <tbody class="divide-y divide-gray-200 bg-white">
                         <tr v-for="p in container?.supplier_payments" :key="p.id">
-                            <td class="px-4 py-2">{{ p.payment_date }}</td>
-                            <td class="px-4 py-2">{{ container?.product_name }}</td>
-                            <td class="px-4 py-2">{{ p.amount }}</td>
-                            <td class="px-4 py-2">{{ container?.remaining_amount }}</td>
-                            <td class="px-4 py-2">{{ p.method }}</td>
-                            <td class="px-4 py-2">
+                            <td class="px-4 py-2" :data-label="$t('common.date')">{{ p.payment_date }}</td>
+                            <td class="px-4 py-2" :data-label="$t('common.container')">{{ container?.product_name }}</td>
+                            <td class="px-4 py-2" :data-label="$t('common.amount')">{{ p.amount }}</td>
+                            <td class="px-4 py-2" :data-label="$t('common.remaining')">{{ container?.remaining_amount }}</td>
+                            <td class="px-4 py-2" :data-label="$t('common.method')">{{ p.method }}</td>
+                            <td class="px-4 py-2" :data-label="$t('common.actions')">
                                 <form @submit.prevent="router.delete(route('supplier-payments.destroy', p.id))" class="inline">
                                     <button type="submit" class="text-sm text-red-600">{{ $t('common.delete') }}</button>
                                 </form>

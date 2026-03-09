@@ -24,12 +24,12 @@ defineProps({ balances: Array });
                 </thead>
                 <tbody class="divide-y divide-gray-200 bg-white">
                     <tr v-for="b in balances" :key="b.supplier?.id">
-                        <td class="px-4 py-2">
+                        <td class="px-4 py-2" :data-label="$t('common.supplier')">
                             <Link :href="route('suppliers.show', b.supplier?.id)" class="text-primary-navy hover:underline">{{ b.supplier?.name }}</Link>
                         </td>
-                        <td class="px-4 py-2">{{ b.total_cost }}</td>
-                        <td class="px-4 py-2">{{ b.total_paid }}</td>
-                        <td class="px-4 py-2 font-medium">{{ b.balance }}</td>
+                        <td class="px-4 py-2" :data-label="$t('common.total_cost')">{{ b.total_cost }}</td>
+                        <td class="px-4 py-2" :data-label="$t('common.total_paid')">{{ b.total_paid }}</td>
+                        <td class="px-4 py-2 font-medium" :data-label="$t('common.balance')">{{ b.balance }}</td>
                     </tr>
                 </tbody>
             </table>

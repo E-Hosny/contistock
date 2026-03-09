@@ -28,10 +28,10 @@ defineProps({ receipts: Object, filters: Object });
                 </thead>
                 <tbody class="divide-y divide-gray-200 bg-white">
                     <tr v-for="r in receipts.data" :key="r.id">
-                        <td class="px-4 py-2 text-sm">{{ r.receipt_date }}</td>
-                        <td class="px-4 py-2">{{ r.container?.product_name }}</td>
-                        <td class="px-4 py-2 text-sm">{{ r.received_by_user?.name }}</td>
-                        <td class="px-4 py-2">
+                        <td class="px-4 py-2 text-sm" :data-label="$t('common.date')">{{ r.receipt_date }}</td>
+                        <td class="px-4 py-2" :data-label="$t('common.container')">{{ r.container?.product_name }}</td>
+                        <td class="px-4 py-2 text-sm" :data-label="$t('common.received_by')">{{ r.received_by_user?.name }}</td>
+                        <td class="px-4 py-2" :data-label="$t('common.actions')">
                             <Link :href="route('warehouse-receipts.show', r.id)" class="text-sm text-blue-600 hover:underline">{{ $t('common.view') }}</Link>
                         </td>
                     </tr>

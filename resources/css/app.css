@@ -17,4 +17,39 @@
     .data-table td {
         text-align: center;
     }
+
+    /* على الجوال: تحويل الجدول إلى كروت منظمة */
+    @media (max-width: 768px) {
+        .data-table thead {
+            display: none;
+        }
+        .data-table tbody tr {
+            display: block;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin-bottom: 0.75rem;
+            background: #fff;
+            box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+        }
+        .data-table tbody td {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.5rem;
+            padding: 0.5rem 0;
+            border: none;
+            text-align: inherit;
+        }
+        .data-table tbody td::before {
+            content: attr(data-label);
+            font-weight: 600;
+            font-size: 0.875rem;
+            color: #6b7280;
+            flex-shrink: 0;
+        }
+        .data-table tbody td:not(:last-child) {
+            border-bottom: 1px solid #f3f4f6;
+        }
+    }
 }

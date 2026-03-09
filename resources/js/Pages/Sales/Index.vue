@@ -32,13 +32,13 @@ defineProps({ sales: Object, filters: Object });
                 </thead>
                 <tbody class="divide-y divide-gray-200 bg-white">
                     <tr v-for="s in sales.data" :key="s.id">
-                        <td class="px-4 py-2 text-sm">{{ s.sale_date }}</td>
-                        <td class="px-4 py-2">{{ s.customer?.name }}</td>
-                        <td class="px-4 py-2">{{ s.total }}</td>
-                        <td class="px-4 py-2">{{ s.paid_amount }}</td>
-                        <td class="px-4 py-2">{{ s.remaining_amount }}</td>
-                        <td class="px-4 py-2"><Badge>{{ $t('statusOptions.' + (s.status || 'draft')) }}</Badge></td>
-                        <td class="px-4 py-2">
+                        <td class="px-4 py-2 text-sm" :data-label="$t('common.date')">{{ s.sale_date }}</td>
+                        <td class="px-4 py-2" :data-label="$t('common.customer')">{{ s.customer?.name }}</td>
+                        <td class="px-4 py-2" :data-label="$t('common.total')">{{ s.total }}</td>
+                        <td class="px-4 py-2" :data-label="$t('common.paid')">{{ s.paid_amount }}</td>
+                        <td class="px-4 py-2" :data-label="$t('common.remaining')">{{ s.remaining_amount }}</td>
+                        <td class="px-4 py-2" :data-label="$t('common.status')"><Badge>{{ $t('statusOptions.' + (s.status || 'draft')) }}</Badge></td>
+                        <td class="px-4 py-2" :data-label="$t('common.actions')">
                             <Link :href="route('sales.show', s.id)" class="text-sm text-blue-600 hover:underline">{{ $t('common.view') }}</Link>
                         </td>
                     </tr>

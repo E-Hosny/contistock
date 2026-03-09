@@ -64,10 +64,10 @@ function allPayments() {
                     </thead>
                     <tbody class="divide-y divide-gray-200 bg-white">
                         <tr v-for="p in allPayments()" :key="p.id">
-                            <td class="px-4 py-2">{{ p.payment_date }}</td>
-                            <td class="px-4 py-2">{{ p.amount }}</td>
-                            <td class="px-4 py-2">{{ p.method }}</td>
-                            <td class="px-4 py-2">
+                            <td class="px-4 py-2" :data-label="$t('common.date')">{{ p.payment_date }}</td>
+                            <td class="px-4 py-2" :data-label="$t('common.amount')">{{ p.amount }}</td>
+                            <td class="px-4 py-2" :data-label="$t('common.method')">{{ p.method }}</td>
+                            <td class="px-4 py-2" :data-label="$t('common.container')">
                                 <Link :href="route('containers.show', p.container_id)" class="text-primary-navy hover:underline">{{ p.container_name }}</Link>
                             </td>
                         </tr>

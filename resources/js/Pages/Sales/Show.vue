@@ -49,11 +49,11 @@ const cancelForm = useForm({});
                     <thead class="bg-gray-50"><tr><th class="px-4 py-2 text-xs font-medium text-gray-500">{{ $t('common.product') }}</th><th class="px-4 py-2 text-xs font-medium text-gray-500">{{ $t('common.qty') }}</th><th class="px-4 py-2 text-xs font-medium text-gray-500">{{ $t('common.unit_price') }}</th><th class="px-4 py-2 text-xs font-medium text-gray-500">{{ $t('common.total') }}</th><th class="px-4 py-2 text-xs font-medium text-gray-500">{{ $t('common.sold_profit') }}</th></tr></thead>
                     <tbody class="divide-y divide-gray-200 bg-white">
                         <tr v-for="item in sale?.sale_items" :key="item.id">
-                            <td class="px-4 py-2">{{ item.product?.name }}</td>
-                            <td class="px-4 py-2">{{ item.qty }}</td>
-                            <td class="px-4 py-2">{{ item.unit_price }}</td>
-                            <td class="px-4 py-2">{{ item.line_total }}</td>
-                            <td class="px-4 py-2">{{ item.profit_line }}</td>
+                            <td class="px-4 py-2" :data-label="$t('common.product')">{{ item.product?.name }}</td>
+                            <td class="px-4 py-2" :data-label="$t('common.qty')">{{ item.qty }}</td>
+                            <td class="px-4 py-2" :data-label="$t('common.unit_price')">{{ item.unit_price }}</td>
+                            <td class="px-4 py-2" :data-label="$t('common.total')">{{ item.line_total }}</td>
+                            <td class="px-4 py-2" :data-label="$t('common.sold_profit')">{{ item.profit_line }}</td>
                         </tr>
                     </tbody>
                 </table>

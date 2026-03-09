@@ -28,12 +28,12 @@ defineProps({ customers: Object, filters: Object });
                 </thead>
                 <tbody class="divide-y divide-gray-200 bg-white">
                     <tr v-for="c in customers.data" :key="c.id">
-                        <td class="px-4 py-2">
+                        <td class="px-4 py-2" :data-label="$t('auth.name')">
                             <Link :href="route('customers.show', c.id)" class="text-primary-navy hover:underline">{{ c.name }}</Link>
                         </td>
-                        <td class="px-4 py-2 text-sm">{{ c.phone }}</td>
-                        <td class="px-4 py-2 text-sm">{{ c.sales_count }}</td>
-                        <td class="px-4 py-2">
+                        <td class="px-4 py-2 text-sm" :data-label="$t('common.phone')">{{ c.phone }}</td>
+                        <td class="px-4 py-2 text-sm" :data-label="$t('nav.sales')">{{ c.sales_count }}</td>
+                        <td class="px-4 py-2" :data-label="$t('common.actions')">
                             <Link :href="route('customers.edit', c.id)" class="text-sm text-blue-600 hover:underline">{{ $t('common.edit') }}</Link>
                         </td>
                     </tr>

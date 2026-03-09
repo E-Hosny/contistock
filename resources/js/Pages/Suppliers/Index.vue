@@ -32,12 +32,12 @@ const props = defineProps({
                     </thead>
                     <tbody class="divide-y divide-gray-200 bg-white">
                         <tr v-for="s in suppliers.data" :key="s.id">
-                            <td class="px-4 py-2">
+                            <td class="px-4 py-2" :data-label="$t('auth.name')">
                                 <Link :href="route('suppliers.show', s.id)" class="text-primary-navy hover:underline">{{ s.name }}</Link>
                             </td>
-                            <td class="px-4 py-2 text-sm text-gray-600">{{ s.phone }}</td>
-                            <td class="px-4 py-2 text-sm">{{ s.containers_count }}</td>
-                            <td class="px-4 py-2">
+                            <td class="px-4 py-2 text-sm text-gray-600" :data-label="$t('common.phone')">{{ s.phone }}</td>
+                            <td class="px-4 py-2 text-sm" :data-label="$t('common.containers_count')">{{ s.containers_count }}</td>
+                            <td class="px-4 py-2" :data-label="$t('common.actions')">
                                 <Link :href="route('suppliers.edit', s.id)" class="text-sm text-blue-600 hover:underline">{{ $t('common.edit') }}</Link>
                             </td>
                         </tr>

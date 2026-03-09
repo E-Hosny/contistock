@@ -32,10 +32,10 @@ const props = defineProps({ report: Object, containers: Array, filterContainerId
                     </thead>
                     <tbody class="divide-y divide-gray-200 bg-white">
                         <tr v-for="row in report?.by_container" :key="row.container_id">
-                            <td class="px-4 py-2">{{ row.container_name }}</td>
-                            <td class="px-4 py-2">{{ row.total_cost }}</td>
-                            <td class="px-4 py-2">{{ row.total_sold_profit }}</td>
-                            <td class="px-4 py-2">{{ row.total_profit_expected }}</td>
+                            <td class="px-4 py-2" :data-label="$t('common.container')">{{ row.container_name }}</td>
+                            <td class="px-4 py-2" :data-label="$t('common.total_cost')">{{ row.total_cost }}</td>
+                            <td class="px-4 py-2" :data-label="$t('common.sold_profit')">{{ row.total_sold_profit }}</td>
+                            <td class="px-4 py-2" :data-label="$t('common.expected_profit')">{{ row.total_profit_expected }}</td>
                         </tr>
                     </tbody>
                 </table>

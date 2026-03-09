@@ -60,21 +60,21 @@ function removeItem(i) {
                     <thead class="bg-gray-50"><tr><th class="px-4 py-2 text-xs font-medium text-gray-500">{{ $t('common.product') }}</th><th class="px-4 py-2 text-xs font-medium text-gray-500">{{ $t('common.container') }}</th><th class="px-4 py-2 text-xs font-medium text-gray-500">{{ $t('common.qty') }}</th><th class="px-4 py-2 text-xs font-medium text-gray-500">{{ $t('common.unit_price') }}</th><th class="px-4 py-2 text-xs font-medium text-gray-500">{{ $t('common.actions') }}</th></tr></thead>
                     <tbody class="divide-y divide-gray-200 bg-white">
                         <tr v-for="(item, i) in form.items" :key="i">
-                            <td class="px-4 py-2">
+                            <td class="px-4 py-2" :data-label="$t('common.product')">
                                 <select v-model="item.product_id" class="w-full rounded border-gray-300 text-sm" required>
                                     <option value="">{{ $t('common.select') }}</option>
                                     <option v-for="p in products" :key="p.id" :value="p.id">{{ p.name }} ({{ p.sku }})</option>
                                 </select>
                             </td>
-                            <td class="px-4 py-2">
+                            <td class="px-4 py-2" :data-label="$t('common.container')">
                                 <select v-model="item.container_id" class="w-full rounded border-gray-300 text-sm" required>
                                     <option value="">{{ $t('common.select') }}</option>
                                     <option v-for="c in containers" :key="c.id" :value="c.id">{{ c.product_name }}</option>
                                 </select>
                             </td>
-                            <td class="px-4 py-2"><input v-model.number="item.qty" type="number" step="0.01" min="0.01" class="mx-auto w-20 rounded border-gray-300 text-center text-sm" required /></td>
-                            <td class="px-4 py-2"><input v-model.number="item.unit_price" type="number" step="0.01" min="0" class="mx-auto w-24 rounded border-gray-300 text-center text-sm" required /></td>
-                            <td class="px-4 py-2"><button type="button" @click="removeItem(i)" class="text-red-600">{{ $t('common.remove') }}</button></td>
+                            <td class="px-4 py-2" :data-label="$t('common.qty')"><input v-model.number="item.qty" type="number" step="0.01" min="0.01" class="mx-auto w-20 rounded border-gray-300 text-center text-sm" required /></td>
+                            <td class="px-4 py-2" :data-label="$t('common.unit_price')"><input v-model.number="item.unit_price" type="number" step="0.01" min="0" class="mx-auto w-24 rounded border-gray-300 text-center text-sm" required /></td>
+                            <td class="px-4 py-2" :data-label="$t('common.actions')"><button type="button" @click="removeItem(i)" class="text-red-600">{{ $t('common.remove') }}</button></td>
                         </tr>
                     </tbody>
                 </table>
