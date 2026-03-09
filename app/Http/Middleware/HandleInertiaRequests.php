@@ -43,6 +43,10 @@ class HandleInertiaRequests extends Middleware
             'logoUrl' => file_exists(public_path('logo.png'))
                 ? asset('logo.png')
                 : null,
+            'flash' => [
+                'success' => fn () => $request->session()->get('success'),
+                'error' => fn () => $request->session()->get('error'),
+            ],
         ];
     }
 }

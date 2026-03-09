@@ -1,6 +1,7 @@
 <script setup>
 import { ref, computed, watch } from 'vue';
 import { Link, usePage } from '@inertiajs/vue3';
+import { toast } from 'vue3-toastify';
 import { setLocale } from '@/i18n';
 import Dropdown from '@/Components/Dropdown.vue';
 import DropdownLink from '@/Components/DropdownLink.vue';
@@ -12,6 +13,11 @@ const locale = computed(() => page.props.locale || 'en');
 const isRtl = computed(() => locale.value === 'ar');
 
 watch(locale, (val) => setLocale(val || 'en'), { immediate: true });
+
+watch(() => page.props.flash, (flash) => {
+    if (flash?.success) toast.success(flash.success);
+    if (flash?.error) toast.error(flash.error);
+}, { deep: true });
 
 const sidebarOpen = ref(false);
 

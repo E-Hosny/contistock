@@ -1,5 +1,6 @@
 <script setup>
-import { Head, Link, useForm } from '@inertiajs/vue3';
+import { ref } from 'vue';
+import { Head, Link, router } from '@inertiajs/vue3';
 import DashboardLayout from '@/Layouts/DashboardLayout.vue';
 import Card from '@/Components/Card.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
@@ -8,8 +9,26 @@ import Badge from '@/Components/Badge.vue';
 
 const props = defineProps({ sale: Object });
 
-const confirmForm = useForm({});
-const cancelForm = useForm({});
+const confirming = ref(false);
+const cancelling = ref(false);
+
+function confirmSale() {
+    if (!props.sale?.id) return;
+    confirming.value = true;
+    router.post(route('sales.confirm', props.sale.id), {}, {
+        preserveScroll: true,
+        onFinish: () => { confirming.value = false; },
+    });
+}
+
+function cancelSale() {
+    if (!props.sale?.id) return;
+    cancelling.value = true;
+    router.post(route('sales.cancel', props.sale.id), {}, {
+        preserveScroll: true,
+        onFinish: () => { cancelling.value = false; },
+    });
+}
 </script>
 
 <template>
@@ -20,12 +39,8 @@ const cancelForm = useForm({});
                 <h2 class="text-xl font-semibold text-gray-800">Sale #{{ sale?.id }}</h2>
                 <div class="flex gap-2">
                     <Link v-if="sale?.status === 'draft'" :href="route('sales.edit', sale.id)"><PrimaryButton>{{ $t('common.edit') }}</PrimaryButton></Link>
-                    <form v-if="sale?.status === 'draft'" @submit.prevent="confirmForm.post(route('sales.confirm', sale.id))" class="inline">
-                        <PrimaryButton type="submit" :disabled="confirmForm.processing">{{ $t('common.confirm') }}</PrimaryButton>
-                    </form>
-                    <form v-if="sale?.status === 'draft' || sale?.status === 'confirmed'" @submit.prevent="cancelForm.post(route('sales.cancel', sale.id))" class="inline">
-                        <DangerButton type="submit" :disabled="cancelForm.processing">{{ $t('common.cancel_sale') }}</DangerButton>
-                    </form>
+                    <PrimaryButton v-if="sale?.status === 'draft'" type="button" :disabled="confirming" @click="confirmSale">{{ $t('common.confirm') }}</PrimaryButton>
+                    <DangerButton v-if="sale?.status === 'draft' || sale?.status === 'confirmed'" type="button" :disabled="cancelling" @click="cancelSale">{{ $t('common.cancel_sale') }}</DangerButton>
                     <Link :href="route('sales.customer-payments.index', sale.id)" class="rounded bg-green-600 px-3 py-2 text-white hover:bg-green-700">{{ $t('common.payments') }}</Link>
                 </div>
             </div>

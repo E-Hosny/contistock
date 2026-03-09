@@ -1,6 +1,7 @@
 <script setup>
 import { watch, computed } from 'vue';
 import { Link, usePage } from '@inertiajs/vue3';
+import { toast } from 'vue3-toastify';
 import { setLocale } from '@/i18n';
 import ApplicationLogo from '@/Components/ApplicationLogo.vue';
 import LanguageSwitcher from '@/Components/LanguageSwitcher.vue';
@@ -8,6 +9,10 @@ import LanguageSwitcher from '@/Components/LanguageSwitcher.vue';
 const page = usePage();
 const locale = computed(() => page.props.locale || 'en');
 watch(locale, (val) => setLocale(val || 'en'), { immediate: true });
+watch(() => page.props.flash, (flash) => {
+    if (flash?.success) toast.success(flash.success);
+    if (flash?.error) toast.error(flash.error);
+}, { deep: true });
 </script>
 
 <template>
