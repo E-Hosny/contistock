@@ -9,10 +9,10 @@ import ApplicationLogo from '@/Components/ApplicationLogo.vue';
 import LanguageSwitcher from '@/Components/LanguageSwitcher.vue';
 
 const page = usePage();
-const locale = computed(() => page.props.locale || 'en');
+const locale = computed(() => page.props.locale || 'ar');
 const isRtl = computed(() => locale.value === 'ar');
 
-watch(locale, (val) => setLocale(val || 'en'), { immediate: true });
+watch(locale, (val) => setLocale(val || 'ar'), { immediate: true });
 
 watch(() => page.props.flash, (flash) => {
     if (flash?.success) toast.success(flash.success);

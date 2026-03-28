@@ -30,7 +30,7 @@ createInertiaApp({
             .use(ZiggyVue);
 
         const page = props.initialPage.props;
-        setLocale(page.locale || 'en');
+        setLocale(page.locale || 'ar');
 
         return app.mount(el);
     },

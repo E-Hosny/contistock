@@ -6,9 +6,9 @@ const LOCALE_KEY = 'contistock_locale';
 
 function getSavedLocale() {
     try {
-        return localStorage.getItem(LOCALE_KEY) || document.documentElement.lang?.slice(0, 2) || 'en';
+        return localStorage.getItem(LOCALE_KEY) || document.documentElement.lang?.slice(0, 2) || 'ar';
     } catch {
-        return 'en';
+        return 'ar';
     }
 }
 

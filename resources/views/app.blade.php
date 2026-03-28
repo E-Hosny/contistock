@@ -1,6 +1,6 @@
 @php
-    $locale = request()->cookie('contistock_locale', config('app.locale', 'en'));
-    $locale = in_array($locale, ['ar', 'en']) ? $locale : 'en';
+    $locale = request()->cookie('contistock_locale', config('app.locale'));
+    $locale = in_array($locale, ['ar', 'en']) ? $locale : config('app.locale');
     $dir = $locale === 'ar' ? 'rtl' : 'ltr';
     $lang = $locale === 'ar' ? 'ar' : 'en';
 @endphp

@@ -29,9 +29,9 @@ class HandleInertiaRequests extends Middleware
      */
     public function share(Request $request): array
     {
-        $locale = $request->cookie('contistock_locale', config('app.locale', 'en'));
+        $locale = $request->cookie('contistock_locale', config('app.locale'));
         if (! in_array($locale, ['ar', 'en'], true)) {
-            $locale = 'en';
+            $locale = config('app.locale');
         }
 
         return [
