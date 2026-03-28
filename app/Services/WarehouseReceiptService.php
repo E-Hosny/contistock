@@ -21,7 +21,7 @@ class WarehouseReceiptService
     {
         return DB::transaction(function () use ($container, $attributes, $items) {
             $receipt = WarehouseReceipt::create([
-                'tenant_id' => current_tenant_id(),
+                'tenant_id' => \current_tenant_id(),
                 'container_id' => $container->id,
                 'received_by' => auth()->id(),
                 'receipt_date' => $attributes['receipt_date'] ?? now()->toDateString(),
@@ -30,7 +30,7 @@ class WarehouseReceiptService
 
             foreach ($items as $item) {
                 $receiptItem = ReceiptItem::create([
-                    'tenant_id' => current_tenant_id(),
+                    'tenant_id' => \current_tenant_id(),
                     'warehouse_receipt_id' => $receipt->id,
                     'container_id' => $container->id,
                     'product_id' => $item['product_id'],
@@ -40,7 +40,7 @@ class WarehouseReceiptService
                 ]);
 
                 StockMovement::create([
-                    'tenant_id' => current_tenant_id(),
+                    'tenant_id' => \current_tenant_id(),
                     'product_id' => $item['product_id'],
                     'container_id' => $container->id,
                     'qty' => $item['qty_received'],

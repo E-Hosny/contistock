@@ -86,7 +86,7 @@ class SaleController extends Controller
             $total = $subtotal - $discount;
 
             $sale = Sale::create([
-                'tenant_id' => current_tenant_id(),
+                'tenant_id' => \current_tenant_id(),
                 'customer_id' => $validated['customer_id'],
                 'sale_date' => $validated['sale_date'],
                 'status' => 'draft',
@@ -97,7 +97,7 @@ class SaleController extends Controller
             ]);
 
             foreach ($items as $item) {
-                $sale->saleItems()->create(array_merge($item, ['tenant_id' => current_tenant_id()]));
+                $sale->saleItems()->create(array_merge($item, ['tenant_id' => \current_tenant_id()]));
             }
 
             return $sale;
@@ -162,7 +162,7 @@ class SaleController extends Controller
                         ->where('container_id', $item['container_id'])->first();
                     $buyPrice = $receiptItem ? (float) $receiptItem->buy_price : 0;
                     $sale->saleItems()->create([
-                        'tenant_id' => current_tenant_id(),
+                        'tenant_id' => \current_tenant_id(),
                         'product_id' => $item['product_id'],
                         'container_id' => $item['container_id'],
                         'qty' => $item['qty'],

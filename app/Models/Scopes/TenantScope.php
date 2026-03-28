@@ -10,8 +10,8 @@ class TenantScope implements Scope
 {
     public function apply(Builder $builder, Model $model): void
     {
-        if (current_tenant_id() !== null) {
-            $builder->where($model->getTable().'.tenant_id', current_tenant_id());
+        if (\current_tenant_id() !== null) {
+            $builder->where($model->getTable().'.tenant_id', \current_tenant_id());
         }
     }
 }

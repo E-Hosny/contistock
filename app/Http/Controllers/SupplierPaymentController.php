@@ -30,7 +30,7 @@ class SupplierPaymentController extends Controller
         $this->authorize('view', $container);
 
         SupplierPayment::create([
-            'tenant_id' => current_tenant_id(),
+            'tenant_id' => \current_tenant_id(),
             'container_id' => $validated['container_id'],
             'amount' => $validated['amount'],
             'payment_date' => $validated['payment_date'],

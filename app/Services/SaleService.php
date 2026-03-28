@@ -47,7 +47,7 @@ class SaleService
                 }
 
                 StockMovement::create([
-                    'tenant_id' => current_tenant_id(),
+                    'tenant_id' => \current_tenant_id(),
                     'product_id' => $item->product_id,
                     'container_id' => $item->container_id,
                     'qty' => $item->qty,

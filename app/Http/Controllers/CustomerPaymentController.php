@@ -30,7 +30,7 @@ class CustomerPaymentController extends Controller
         $this->authorize('view', $sale);
 
         CustomerPayment::create([
-            'tenant_id' => current_tenant_id(),
+            'tenant_id' => \current_tenant_id(),
             'sale_id' => $validated['sale_id'],
             'amount' => $validated['amount'],
             'payment_date' => $validated['payment_date'],
