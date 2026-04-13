@@ -47,14 +47,27 @@ class SaleController extends Controller
         ]);
     }
 
-    public function create(): Response
+    public function create(Request $request): Response
     {
         $this->authorize('create', Sale::class);
+
+        $preContainerId = $request->query('container_id') ? (int) $request->query('container_id') : null;
+        $containers = Container::where('status', 'received_to_warehouse')->orderBy('product_name')->get(['id', 'product_name']);
+        $preselectedContainerId = null;
+
+        if ($preContainerId) {
+            $pre = Container::find($preContainerId);
+            if ($pre && $request->user()->can('view', $pre) && $pre->status === 'received_to_warehouse') {
+                $containers = $containers->sortByDesc(fn ($c) => (int) $c->id === (int) $pre->id)->values();
+                $preselectedContainerId = $pre->id;
+            }
+        }
 
         return Inertia::render('Sales/Create', [
             'customers' => Customer::orderBy('name')->get(['id', 'name']),
             'products' => Product::orderBy('name')->get(['id', 'name', 'sku']),
-            'containers' => Container::where('status', 'received_to_warehouse')->orderBy('product_name')->get(['id', 'product_name']),
+            'containers' => $containers,
+            'preselectedContainerId' => $preselectedContainerId,
         ]);
     }
 
@@ -69,7 +82,10 @@ class SaleController extends Controller
                 $lineTotal = (float) $item['qty'] * (float) $item['unit_price'];
                 $subtotal += $lineTotal;
                 $receiptItem = ReceiptItem::where('product_id', $item['product_id'])
-                    ->where('container_id', $item['container_id'])->first();
+                    ->where('container_id', $item['container_id'])
+                    ->whereNotNull('warehouse_receipt_id')
+                    ->orderByDesc('id')
+                    ->first();
                 $buyPrice = $receiptItem ? (float) $receiptItem->buy_price : 0;
                 $profitLine = ($item['unit_price'] - $buyPrice) * $item['qty'];
                 $items[] = [
@@ -159,7 +175,10 @@ class SaleController extends Controller
                     $lineTotal = (float) $item['qty'] * (float) $item['unit_price'];
                     $subtotal += $lineTotal;
                     $receiptItem = ReceiptItem::where('product_id', $item['product_id'])
-                        ->where('container_id', $item['container_id'])->first();
+                        ->where('container_id', $item['container_id'])
+                        ->whereNotNull('warehouse_receipt_id')
+                        ->orderByDesc('id')
+                        ->first();
                     $buyPrice = $receiptItem ? (float) $receiptItem->buy_price : 0;
                     $sale->saleItems()->create([
                         'tenant_id' => \current_tenant_id(),

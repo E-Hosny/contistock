@@ -18,11 +18,6 @@ class StoreWarehouseReceiptRequest extends FormRequest
             'container_id' => ['required', 'exists:containers,id'],
             'receipt_date' => ['required', 'date'],
             'notes' => ['nullable', 'string'],
-            'items' => ['required', 'array', 'min:1'],
-            'items.*.product_id' => ['required', 'exists:products,id'],
-            'items.*.qty_received' => ['required', 'numeric', 'min:0.01'],
-            'items.*.buy_price' => ['required', 'numeric', 'min:0'],
-            'items.*.sale_price' => ['required', 'numeric', 'min:0'],
         ];
     }
 }

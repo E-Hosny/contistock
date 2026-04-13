@@ -4,13 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreWarehouseReceiptRequest;
 use App\Models\Container;
-use App\Models\Product;
+use App\Models\ReceiptItem;
 use App\Models\WarehouseReceipt;
 use App\Services\WarehouseReceiptService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
+use RuntimeException;
 
 class WarehouseReceiptController extends Controller
 {
@@ -37,12 +38,41 @@ class WarehouseReceiptController extends Controller
     {
         $this->authorize('create', WarehouseReceipt::class);
 
-        $preselectedContainerId = $request->query('container_id');
+        $preselectedContainerId = $request->query('container_id') ? (int) $request->query('container_id') : null;
+
+        $eligibleContainers = Container::query()
+            ->whereIn('status', ['draft', 'purchased'])
+            ->whereHas('receiptItems', fn ($q) => $q->whereNull('warehouse_receipt_id'))
+            ->orderBy('product_name')
+            ->get(['id', 'product_name']);
+
+        if ($preselectedContainerId && ! $eligibleContainers->firstWhere('id', $preselectedContainerId)) {
+            $extra = Container::find($preselectedContainerId);
+            if ($extra && $request->user()->can('view', $extra)) {
+                $eligibleContainers = collect([$extra->only(['id', 'product_name'])])
+                    ->merge($eligibleContainers->map(fn ($c) => $c->only(['id', 'product_name'])))
+                    ->unique('id')
+                    ->values();
+            }
+        }
+
+        $plannedItems = collect();
+        if ($preselectedContainerId) {
+            $selected = Container::find($preselectedContainerId);
+            if ($selected && $request->user()->can('view', $selected)) {
+                $plannedItems = ReceiptItem::query()
+                    ->where('container_id', $selected->id)
+                    ->whereNull('warehouse_receipt_id')
+                    ->with('product')
+                    ->orderBy('id')
+                    ->get();
+            }
+        }
 
         return Inertia::render('WarehouseReceipts/Create', [
-            'containers' => Container::orderBy('product_name')->get(['id', 'product_name']),
-            'products' => Product::orderBy('name')->get(['id', 'name', 'sku']),
-            'preselectedContainerId' => $preselectedContainerId ? (int) $preselectedContainerId : null,
+            'eligibleContainers' => $eligibleContainers,
+            'preselectedContainerId' => $preselectedContainerId,
+            'plannedItems' => $plannedItems,
         ]);
     }
 
@@ -52,20 +82,18 @@ class WarehouseReceiptController extends Controller
         $container = Container::findOrFail($validated['container_id']);
 
         $this->authorize('create', WarehouseReceipt::class);
+        $this->authorize('view', $container);
 
-        $items = array_map(fn ($item) => [
-            'product_id' => $item['product_id'],
-            'qty_received' => (float) $item['qty_received'],
-            'buy_price' => (float) $item['buy_price'],
-            'sale_price' => (float) $item['sale_price'],
-        ], $validated['items']);
+        try {
+            $receipt = $this->warehouseReceiptService->finalizePlannedReceipt($container, [
+                'receipt_date' => $validated['receipt_date'],
+                'notes' => $validated['notes'] ?? null,
+            ]);
+        } catch (RuntimeException $e) {
+            return redirect()->back()->withInput()->with('error', $e->getMessage());
+        }
 
-        $this->warehouseReceiptService->createReceipt($container, [
-            'receipt_date' => $validated['receipt_date'],
-            'notes' => $validated['notes'] ?? null,
-        ], $items);
-
-        return redirect()->route('warehouse-receipts.index')->with('success', __('Warehouse receipt created.'));
+        return redirect()->route('warehouse-receipts.show', $receipt)->with('success', __('Warehouse receipt created.'));
     }
 
     public function show(WarehouseReceipt $warehouseReceipt): Response

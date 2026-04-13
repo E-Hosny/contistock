@@ -13,7 +13,6 @@ const form = useForm({
     product_name: props.container?.product_name ?? '',
     description: props.container?.description ?? '',
     total_weight_kg: props.container?.total_weight_kg ?? '',
-    total_cost: props.container?.total_cost ?? '',
     purchase_date: props.container?.purchase_date ?? '',
     invoice_ref: props.container?.invoice_ref ?? '',
     status: props.container?.status ?? 'draft',
@@ -36,10 +35,6 @@ const form = useForm({
             <div>
                 <InputLabel for="product_name" :value="$t('common.product')" />
                 <TextInput id="product_name" v-model="form.product_name" class="mt-1 block w-full" required />
-            </div>
-            <div>
-                <InputLabel for="total_cost" :value="$t('common.total_cost')" />
-                <TextInput id="total_cost" v-model="form.total_cost" type="number" step="0.01" class="mt-1 block w-full" required />
             </div>
             <div>
                 <InputLabel for="description" :value="$t('common.details')" />

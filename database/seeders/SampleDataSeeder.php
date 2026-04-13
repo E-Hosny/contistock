@@ -5,8 +5,10 @@ namespace Database\Seeders;
 use App\Models\Container;
 use App\Models\Customer;
 use App\Models\Product;
+use App\Models\ReceiptItem;
 use App\Models\Supplier;
 use App\Models\Tenant;
+use App\Services\ContainerCostService;
 use Illuminate\Database\Seeder;
 
 class SampleDataSeeder extends Seeder
@@ -60,7 +62,7 @@ class SampleDataSeeder extends Seeder
             ]
         );
 
-        Container::firstOrCreate(
+        $container = Container::firstOrCreate(
             [
                 'tenant_id' => $tenant->id,
                 'product_name' => 'Sample Container',
@@ -70,11 +72,26 @@ class SampleDataSeeder extends Seeder
                 'tenant_id' => $tenant->id,
                 'supplier_id' => $supplier->id,
                 'product_name' => 'Sample Container',
-                'total_cost' => 1000,
+                'total_cost' => 0,
                 'purchase_date' => now(),
                 'invoice_ref' => 'INV-DEMO-001',
                 'status' => 'draft',
             ]
         );
+
+        $product = Product::where('tenant_id', $tenant->id)->where('sku', 'SKU-001')->first();
+        if ($product && ! ReceiptItem::where('container_id', $container->id)->exists()) {
+            ReceiptItem::create([
+                'tenant_id' => $tenant->id,
+                'warehouse_receipt_id' => null,
+                'container_id' => $container->id,
+                'product_id' => $product->id,
+                'qty_received' => 100,
+                'buy_price' => 10,
+                'sale_price' => 15,
+            ]);
+        }
+
+        app(ContainerCostService::class)->refreshTotalCost($container->fresh());
     }
 }

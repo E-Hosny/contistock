@@ -18,7 +18,6 @@ class UpdateContainerRequest extends FormRequest
             'product_name' => ['required', 'string', 'max:255'],
             'description' => ['nullable', 'string'],
             'total_weight_kg' => ['nullable', 'numeric', 'min:0'],
-            'total_cost' => ['required', 'numeric', 'min:0'],
             'purchase_date' => ['nullable', 'date'],
             'invoice_ref' => ['nullable', 'string', 'max:255'],
             'status' => ['string', 'in:draft,purchased,received_to_warehouse,closed'],

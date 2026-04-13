@@ -1,8 +1,11 @@
 <?php
 
 use App\Http\Controllers\ContainerController;
+use App\Http\Controllers\ContainerExpenseController;
+use App\Http\Controllers\ContainerReceiptItemController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\CustomerPaymentController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\SaleController;
@@ -10,7 +13,6 @@ use App\Http\Controllers\StockController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\SupplierPaymentController;
 use App\Http\Controllers\WarehouseReceiptController;
-use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -24,7 +26,15 @@ Route::middleware(['auth', 'verified', 'tenant'])->group(function () {
     })->name('settings');
 
     Route::resource('suppliers', SupplierController::class);
+    Route::get('containers/{container}/purchases', [ContainerController::class, 'purchases'])->name('containers.purchases');
+    Route::get('containers/{container}/sales', [ContainerController::class, 'sales'])->name('containers.sales');
     Route::resource('containers', ContainerController::class);
+    Route::post('containers/{container}/receipt-items', [ContainerReceiptItemController::class, 'store'])->name('containers.receipt-items.store');
+    Route::put('containers/{container}/receipt-items/{receiptItem}', [ContainerReceiptItemController::class, 'update'])->name('containers.receipt-items.update');
+    Route::delete('containers/{container}/receipt-items/{receiptItem}', [ContainerReceiptItemController::class, 'destroy'])->name('containers.receipt-items.destroy');
+    Route::post('containers/{container}/expenses', [ContainerExpenseController::class, 'store'])->name('containers.expenses.store');
+    Route::put('containers/{container}/expenses/{expense}', [ContainerExpenseController::class, 'update'])->name('containers.expenses.update');
+    Route::delete('containers/{container}/expenses/{expense}', [ContainerExpenseController::class, 'destroy'])->name('containers.expenses.destroy');
     Route::get('containers/{container}/supplier-payments', [SupplierPaymentController::class, 'index'])->name('containers.supplier-payments.index');
     Route::post('supplier-payments', [SupplierPaymentController::class, 'store'])->name('supplier-payments.store');
     Route::delete('supplier-payments/{supplierPayment}', [SupplierPaymentController::class, 'destroy'])->name('supplier-payments.destroy');
@@ -49,6 +59,7 @@ Route::middleware(['auth', 'verified', 'tenant'])->group(function () {
 
 Route::post('/locale', function (\Illuminate\Http\Request $request) {
     $locale = $request->validate(['locale' => 'required|in:ar,en'])['locale'];
+
     return redirect()->back()->cookie('contistock_locale', $locale, 60 * 24 * 365);
 })->name('locale.update');
 

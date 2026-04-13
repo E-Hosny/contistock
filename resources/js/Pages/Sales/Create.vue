@@ -1,4 +1,5 @@
 <script setup>
+import { watch } from 'vue';
 import { Head, Link, useForm } from '@inertiajs/vue3';
 import DashboardLayout from '@/Layouts/DashboardLayout.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
@@ -6,7 +7,12 @@ import SecondaryButton from '@/Components/SecondaryButton.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import TextInput from '@/Components/TextInput.vue';
 
-const props = defineProps({ customers: Array, products: Array, containers: Array });
+const props = defineProps({
+    customers: Array,
+    products: Array,
+    containers: Array,
+    preselectedContainerId: [Number, String, null],
+});
 
 const form = useForm({
     customer_id: '',
@@ -16,8 +22,29 @@ const form = useForm({
     items: [{ product_id: '', container_id: '', qty: 1, unit_price: 0 }],
 });
 
+watch(
+    () => props.preselectedContainerId,
+    (id) => {
+        if (!id) {
+            return;
+        }
+        const cid = String(id);
+        form.items.forEach((row) => {
+            if (!row.container_id) {
+                row.container_id = cid;
+            }
+        });
+    },
+    { immediate: true },
+);
+
 function addItem() {
-    form.items.push({ product_id: '', container_id: '', qty: 1, unit_price: 0 });
+    form.items.push({
+        product_id: '',
+        container_id: props.preselectedContainerId ? String(props.preselectedContainerId) : '',
+        qty: 1,
+        unit_price: 0,
+    });
 }
 
 function removeItem(i) {

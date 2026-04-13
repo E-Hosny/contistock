@@ -49,6 +49,6 @@ class SupplierPaymentController extends Controller
         $containerId = $supplierPayment->container_id;
         $supplierPayment->delete();
 
-        return redirect()->route('containers.supplier-payments.index', $containerId)->with('success', __('Payment deleted.'));
+        return redirect()->route('containers.purchases', $containerId)->with('success', __('Payment deleted.'));
     }
 }

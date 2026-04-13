@@ -24,7 +24,7 @@ const form = useForm({
         <template #header>
             <div class="flex items-center justify-between">
                 <h2 class="text-xl font-semibold text-gray-800">Payments — {{ container?.product_name }}</h2>
-                <Link :href="route('containers.show', container?.id)">{{ $t('common.back_to_container') }}</Link>
+                <Link :href="route('containers.purchases', container?.id)">{{ $t('common.back_to_container') }}</Link>
             </div>
         </template>
         <div class="space-y-4">

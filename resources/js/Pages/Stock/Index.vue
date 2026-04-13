@@ -1,9 +1,30 @@
 <script setup>
-import { Head, Link } from '@inertiajs/vue3';
+import { ref, watch } from 'vue';
+import { Head, router } from '@inertiajs/vue3';
 import DashboardLayout from '@/Layouts/DashboardLayout.vue';
 import Card from '@/Components/Card.vue';
 
 const props = defineProps({ stock: Array, containers: Array, filterContainerId: [Number, String] });
+
+const selectedContainerId = ref(
+    props.filterContainerId != null && props.filterContainerId !== '' ? String(props.filterContainerId) : '',
+);
+
+watch(
+    () => props.filterContainerId,
+    (v) => {
+        selectedContainerId.value = v != null && v !== '' ? String(v) : '';
+    },
+);
+
+function applyContainerFilter() {
+    const id = selectedContainerId.value;
+    router.get(
+        route('stock.index'),
+        id ? { container_id: id } : {},
+        { preserveState: true, preserveScroll: true, replace: true },
+    );
+}
 </script>
 
 <template>
@@ -13,13 +34,18 @@ const props = defineProps({ stock: Array, containers: Array, filterContainerId: 
             <h2 class="text-xl font-semibold text-gray-800">{{ $t('nav.stock') }}</h2>
         </template>
         <div class="space-y-4">
-            <form :action="route('stock.index')" method="get" class="flex gap-2">
-                <select name="container_id" class="rounded border-gray-300 shadow-sm">
+            <div class="flex flex-wrap items-center gap-2">
+                <label for="stock_container_filter" class="text-sm text-gray-600">{{ $t('common.container') }}</label>
+                <select
+                    id="stock_container_filter"
+                    v-model="selectedContainerId"
+                    class="rounded border-gray-300 shadow-sm"
+                    @change="applyContainerFilter"
+                >
                     <option value="">{{ $t('common.all_containers') }}</option>
-                    <option v-for="c in containers" :key="c.id" :value="c.id" :selected="filterContainerId == c.id">{{ c.product_name }}</option>
+                    <option v-for="c in containers" :key="c.id" :value="String(c.id)">{{ c.product_name }}</option>
                 </select>
-                <button type="submit" class="rounded bg-gray-200 px-3 py-1">{{ $t('common.filter') }}</button>
-            </form>
+            </div>
             <Card>
                 <table class="data-table min-w-full divide-y divide-gray-200">
                     <thead class="bg-gray-50">

@@ -4,7 +4,6 @@ namespace App\Models;
 
 use App\Models\Concerns\BelongsToTenant;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use App\Models\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -52,6 +51,24 @@ class Container extends Model
     public function receiptItems(): HasMany
     {
         return $this->hasMany(ReceiptItem::class);
+    }
+
+    public function expenses(): HasMany
+    {
+        return $this->hasMany(ContainerExpense::class);
+    }
+
+    /**
+     * Purchase lines not yet linked to a warehouse receipt.
+     */
+    public function pendingReceiptItems(): HasMany
+    {
+        return $this->receiptItems()->whereNull('warehouse_receipt_id');
+    }
+
+    public function canEditPurchasePlan(): bool
+    {
+        return in_array($this->status, ['draft', 'purchased'], true);
     }
 
     public function saleItems(): HasMany

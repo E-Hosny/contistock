@@ -1,11 +1,15 @@
 <script setup>
-import { Head, Link } from '@inertiajs/vue3';
+import { Head, Link, router } from '@inertiajs/vue3';
 import DashboardLayout from '@/Layouts/DashboardLayout.vue';
 import Card from '@/Components/Card.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import Badge from '@/Components/Badge.vue';
 
-const props = defineProps({ containers: Object, filters: Object });
+defineProps({ containers: Object, filters: Object });
+
+function goToContainerShow(containerId) {
+    router.visit(route('containers.show', containerId));
+}
 </script>
 
 <template>
@@ -30,15 +34,20 @@ const props = defineProps({ containers: Object, filters: Object });
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-200 bg-white">
-                    <tr v-for="c in containers.data" :key="c.id">
+                    <tr
+                        v-for="c in containers.data"
+                        :key="c.id"
+                        class="cursor-pointer transition-colors hover:bg-gray-50/90 md:hover:bg-transparent"
+                        @click="goToContainerShow(c.id)"
+                    >
                         <td class="px-4 py-2" :data-label="$t('common.product')">
-                            <Link :href="route('containers.show', c.id)" class="text-primary-navy hover:underline">{{ c.product_name }}</Link>
+                            <span class="font-medium text-primary-navy">{{ c.product_name }}</span>
                         </td>
                         <td class="px-4 py-2 text-sm" :data-label="$t('common.supplier')">{{ c.supplier?.name }}</td>
                         <td class="px-4 py-2 text-sm" :data-label="$t('common.total_cost')">{{ c.total_cost }}</td>
                         <td class="px-4 py-2 text-sm" :data-label="$t('common.paid')">{{ c.paid_amount }}</td>
                         <td class="px-4 py-2" :data-label="$t('common.status')"><Badge>{{ $t('statusOptions.' + (c.status || 'draft')) }}</Badge></td>
-                        <td class="px-4 py-2" :data-label="$t('common.actions')">
+                        <td class="px-4 py-2" :data-label="$t('common.actions')" @click.stop>
                             <Link :href="route('containers.edit', c.id)" class="text-sm text-blue-600 hover:underline">{{ $t('common.edit') }}</Link>
                         </td>
                     </tr>

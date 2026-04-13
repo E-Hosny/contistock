@@ -1,3 +1,12 @@
 {
-    "ContiStock": "كونتي ستوك"
+    "ContiStock": "كونتي ستوك",
+    "This container is already received into the warehouse.": "تم استلام هذه الحاوية إلى المخزن مسبقاً.",
+    "Add purchase lines on the container page before receiving to the warehouse.": "أضف بنود المشتريات من صفحة الحاوية قبل استلام المخزن.",
+    "Purchase line added.": "تمت إضافة سطر المشتريات.",
+    "Purchase line updated.": "تم تحديث سطر المشتريات.",
+    "Purchase line removed.": "تم حذف سطر المشتريات.",
+    "Expense added.": "تمت إضافة المصروف.",
+    "Expense updated.": "تم تحديث المصروف.",
+    "Expense removed.": "تم حذف المصروف.",
+    "This product is already on the purchase list for this container.": "هذا المنتج موجود بالفعل في قائمة مشتريات هذه الحاوية."
 }

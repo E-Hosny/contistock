@@ -4,7 +4,6 @@ namespace App\Models;
 
 use App\Models\Concerns\BelongsToTenant;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use App\Models\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class ReceiptItem extends Model
@@ -33,6 +32,11 @@ class ReceiptItem extends Model
     public function warehouseReceipt(): BelongsTo
     {
         return $this->belongsTo(WarehouseReceipt::class);
+    }
+
+    public function isPending(): bool
+    {
+        return $this->warehouse_receipt_id === null;
     }
 
     public function container(): BelongsTo

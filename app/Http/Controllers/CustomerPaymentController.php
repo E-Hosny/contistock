@@ -46,9 +46,8 @@ class CustomerPaymentController extends Controller
     {
         $this->authorize('delete', $customerPayment);
 
-        $saleId = $customerPayment->sale_id;
         $customerPayment->delete();
 
-        return redirect()->route('sales.customer-payments.index', $saleId)->with('success', __('Payment deleted.'));
+        return redirect()->back()->with('success', __('Payment deleted.'));
     }
 }
