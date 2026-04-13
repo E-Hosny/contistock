@@ -17,8 +17,16 @@ class StockController extends Controller
 
     public function index(Request $request): Response
     {
-        $products = Product::orderBy('name')->get();
         $containerId = $request->input('container_id') ? (int) $request->input('container_id') : null;
+
+        if ($containerId !== null) {
+            $linkedIds = $this->stockService->productIdsLinkedToContainer($containerId);
+            $products = $linkedIds === []
+                ? collect()
+                : Product::query()->whereIn('id', $linkedIds)->orderBy('name')->get();
+        } else {
+            $products = Product::orderBy('name')->get();
+        }
 
         $stock = [];
         foreach ($products as $product) {

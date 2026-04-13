@@ -10,6 +10,7 @@ const props = defineProps({
     container: Object,
     purchasesCard: Object,
     salesCard: Object,
+    stockCard: Object,
     canReceiveToWarehouse: Boolean,
 });
 
@@ -79,9 +80,7 @@ const receiveUrl = computed(
                 </div>
             </Card>
 
-            <p class="text-center text-sm text-gray-500">{{ $t('pages.containers.open_workspace_cards_hint') }}</p>
-
-            <div class="grid gap-4 lg:grid-cols-2">
+            <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                 <Link
                     :href="route('containers.purchases', container.id)"
                     class="block rounded-2xl border-2 border-gray-200 bg-white p-6 text-start shadow-sm transition hover:border-primary-navy hover:shadow-md focus:outline-none focus:ring-2 focus:ring-primary-navy/40"
@@ -130,6 +129,27 @@ const receiveUrl = computed(
                         </div>
                     </dl>
                     <p class="mt-3 text-xs text-gray-500">{{ $t('pages.containers.card_sales_hint') }}</p>
+                </Link>
+
+                <Link
+                    :href="route('containers.stock', container.id)"
+                    class="block rounded-2xl border-2 border-gray-200 bg-white p-6 text-start shadow-sm transition hover:border-sky-600 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-sky-500/35 md:max-lg:col-span-2"
+                >
+                    <div class="flex items-start justify-between gap-2">
+                        <h3 class="text-lg font-bold text-gray-900">{{ $t('pages.containers.card_stock') }}</h3>
+                        <span class="shrink-0 text-sky-700">→</span>
+                    </div>
+                    <dl class="mt-4 grid grid-cols-2 gap-3">
+                        <div class="rounded-lg bg-gray-50 p-3 ring-1 ring-gray-100">
+                            <dt class="text-xs font-medium text-gray-500">{{ $t('pages.containers.stock_skus_with_qty') }}</dt>
+                            <dd class="mt-1 text-lg font-semibold text-gray-900">{{ stockCard?.skus_with_qty }}</dd>
+                        </div>
+                        <div class="rounded-lg bg-gray-50 p-3 ring-1 ring-gray-100">
+                            <dt class="text-xs font-medium text-gray-500">{{ $t('pages.containers.stock_total_available') }}</dt>
+                            <dd class="mt-1 text-lg font-semibold text-sky-800">{{ stockCard?.total_available_qty }}</dd>
+                        </div>
+                    </dl>
+                    <p class="mt-3 text-xs text-gray-500">{{ $t('pages.containers.card_stock_hint') }}</p>
                 </Link>
             </div>
         </div>

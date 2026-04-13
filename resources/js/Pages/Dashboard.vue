@@ -1,12 +1,11 @@
 <script setup>
 import { Head, Link } from '@inertiajs/vue3';
 import DashboardLayout from '@/Layouts/DashboardLayout.vue';
-import Card from '@/Components/Card.vue';
+import PrimaryButton from '@/Components/PrimaryButton.vue';
+import Badge from '@/Components/Badge.vue';
 
-const props = defineProps({
-    stats: { type: Object, default: () => ({}) },
-    supplierBalances: { type: Array, default: () => [] },
-    customerBalances: { type: Array, default: () => [] },
+defineProps({
+    containers: { type: Array, default: () => [] },
 });
 </script>
 
@@ -15,66 +14,55 @@ const props = defineProps({
 
     <DashboardLayout>
         <template #header>
-            <h2 class="text-xl font-semibold leading-tight text-gray-800">
-                {{ $t('nav.dashboard') }}
-            </h2>
+            <div class="flex flex-wrap items-center justify-between gap-3">
+                <h2 class="text-xl font-semibold leading-tight text-gray-800">
+                    {{ $t('nav.containers') }}
+                </h2>
+                <Link :href="route('containers.create')">
+                    <PrimaryButton type="button">{{ $t('pages.containers.new') }}</PrimaryButton>
+                </Link>
+            </div>
         </template>
 
-        <div class="space-y-6">
-            <div class="rounded-lg bg-white p-6 shadow-sm">
-                <h3 class="text-lg font-semibold text-primary-navy">
-                    {{ $t('dashboard.welcome') }}
-                </h3>
-                <p class="mt-1 text-gray-600">{{ $t('dashboard.subtitle') }}</p>
-            </div>
+        <div v-if="containers?.length" class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            <Link
+                v-for="c in containers"
+                :key="c.id"
+                :href="route('containers.show', c.id)"
+                class="block rounded-2xl border-2 border-gray-200 bg-white p-5 text-start shadow-sm transition hover:border-primary-navy hover:shadow-md focus:outline-none focus:ring-2 focus:ring-primary-navy/40"
+            >
+                <div class="flex items-start justify-between gap-2">
+                    <h3 class="text-lg font-bold text-gray-900">{{ c.product_name }}</h3>
+                    <span class="shrink-0 text-primary-navy">→</span>
+                </div>
+                <p v-if="c.supplier?.name" class="mt-2 text-sm text-gray-600">
+                    <span class="text-gray-500">{{ $t('common.supplier') }}:</span>
+                    <span class="ms-1 font-medium text-gray-800">{{ c.supplier.name }}</span>
+                </p>
+                <div class="mt-3 flex flex-wrap items-center gap-2">
+                    <Badge>{{ $t('statusOptions.' + (c.status || 'draft')) }}</Badge>
+                </div>
+                <dl class="mt-4 grid grid-cols-2 gap-3 text-sm">
+                    <div class="rounded-lg bg-gray-50 p-2 ring-1 ring-gray-100">
+                        <dt class="text-xs font-medium text-gray-500">{{ $t('common.total_cost') }}</dt>
+                        <dd class="mt-0.5 font-semibold text-gray-900">{{ c.total_cost }}</dd>
+                    </div>
+                    <div class="rounded-lg bg-gray-50 p-2 ring-1 ring-gray-100">
+                        <dt class="text-xs font-medium text-gray-500">{{ $t('common.paid') }}</dt>
+                        <dd class="mt-0.5 font-semibold text-green-700">{{ c.paid_amount }}</dd>
+                    </div>
+                </dl>
+            </Link>
+        </div>
 
-            <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-                <Card>
-                    <template #title>{{ $t('dashboard.suppliers_balance') }}</template>
-                    <p class="text-2xl font-semibold text-gray-800">{{ stats.suppliers_balance ?? 0 }}</p>
-                </Card>
-                <Card>
-                    <template #title>{{ $t('dashboard.customers_balance') }}</template>
-                    <p class="text-2xl font-semibold text-gray-800">{{ stats.customers_balance ?? 0 }}</p>
-                </Card>
-                <Card>
-                    <template #title>{{ $t('dashboard.inventory_value') }}</template>
-                    <p class="text-2xl font-semibold text-gray-800">{{ stats.inventory_value ?? 0 }}</p>
-                </Card>
-                <Card>
-                    <template #title>{{ $t('dashboard.total_profit') }}</template>
-                    <p class="text-2xl font-semibold text-gray-800">{{ stats.total_profit ?? 0 }}</p>
-                </Card>
-            </div>
-
-            <div class="grid gap-4 lg:grid-cols-2">
-                <Card>
-                    <template #title>
-                        <Link :href="route('reports.supplier-balance')" class="hover:underline">
-                            {{ $t('dashboard.suppliers_balance') }} ({{ supplierBalances.length }})
-                        </Link>
-                    </template>
-                    <ul class="space-y-1 text-sm text-gray-600">
-                        <li v-for="b in supplierBalances" :key="b.supplier?.id">
-                            {{ b.supplier?.name }}: {{ b.balance }}
-                        </li>
-                        <li v-if="!supplierBalances.length">{{ $t('common.no_data') }}</li>
-                    </ul>
-                </Card>
-                <Card>
-                    <template #title>
-                        <Link :href="route('reports.customer-balance')" class="hover:underline">
-                            {{ $t('dashboard.customers_balance') }} ({{ customerBalances.length }})
-                        </Link>
-                    </template>
-                    <ul class="space-y-1 text-sm text-gray-600">
-                        <li v-for="b in customerBalances" :key="b.customer?.id">
-                            {{ b.customer?.name }}: {{ b.balance }}
-                        </li>
-                        <li v-if="!customerBalances.length">{{ $t('common.no_data') }}</li>
-                    </ul>
-                </Card>
-            </div>
+        <div
+            v-else
+            class="flex flex-col items-center justify-center rounded-2xl border-2 border-dashed border-gray-300 bg-gray-50/60 px-6 py-16 text-center"
+        >
+            <p class="text-gray-600">{{ $t('pages.containers.no_containers') }}</p>
+            <Link :href="route('containers.create')" class="mt-6">
+                <PrimaryButton type="button">{{ $t('pages.containers.new') }}</PrimaryButton>
+            </Link>
         </div>
     </DashboardLayout>
 </template>

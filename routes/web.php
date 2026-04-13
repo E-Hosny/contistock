@@ -28,6 +28,7 @@ Route::middleware(['auth', 'verified', 'tenant'])->group(function () {
     Route::resource('suppliers', SupplierController::class);
     Route::get('containers/{container}/purchases', [ContainerController::class, 'purchases'])->name('containers.purchases');
     Route::get('containers/{container}/sales', [ContainerController::class, 'sales'])->name('containers.sales');
+    Route::get('containers/{container}/stock', [ContainerController::class, 'stock'])->name('containers.stock');
     Route::resource('containers', ContainerController::class);
     Route::post('containers/{container}/receipt-items', [ContainerReceiptItemController::class, 'store'])->name('containers.receipt-items.store');
     Route::put('containers/{container}/receipt-items/{receiptItem}', [ContainerReceiptItemController::class, 'update'])->name('containers.receipt-items.update');

@@ -16,25 +16,15 @@ class ReportController extends Controller
 
     public function dashboard(): Response
     {
-        $supplierBalances = $this->reportService->supplierBalances();
-        $customerBalances = $this->reportService->customerBalances();
-        $suppliersTotalRemaining = $supplierBalances->sum('balance');
-        $customersTotalRemaining = $customerBalances->sum('balance');
+        $this->authorize('viewAny', Container::class);
 
-        $containers = Container::with('supplier')->get();
-        $inventoryValue = 0; // Could be computed from stock * cost if needed
-        $profitReport = $this->reportService->profitReport();
-        $totalProfit = collect($profitReport['by_container'])->sum('total_sold_profit');
+        $containers = Container::with('supplier')->orderByDesc('created_at')->get();
+        foreach ($containers as $container) {
+            $container->append(['paid_amount', 'remaining_amount']);
+        }
 
         return Inertia::render('Dashboard', [
-            'stats' => [
-                'suppliers_balance' => round($suppliersTotalRemaining, 2),
-                'customers_balance' => round($customersTotalRemaining, 2),
-                'inventory_value' => $inventoryValue,
-                'total_profit' => round($totalProfit, 2),
-            ],
-            'supplierBalances' => $supplierBalances->take(5),
-            'customerBalances' => $customerBalances->take(5),
+            'containers' => $containers,
         ]);
     }
 

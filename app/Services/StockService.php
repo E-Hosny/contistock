@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use App\Models\Product;
+use App\Models\ReceiptItem;
 use App\Models\StockMovement;
 
 class StockService
@@ -17,6 +17,7 @@ class StockService
             if ($containerId !== null) {
                 $q->where('container_id', $containerId);
             }
+
             return $q;
         };
 
@@ -44,5 +45,22 @@ class StockService
         $setting = \App\Models\Setting::where('key', 'allow_negative_stock')->first();
 
         return $setting && in_array(strtolower($setting->value ?? ''), ['1', 'true', 'yes'], true);
+    }
+
+    /**
+     * Product IDs that have at least one purchase/receipt line on the container (pending or received).
+     *
+     * @return list<int>
+     */
+    public function productIdsLinkedToContainer(int $containerId): array
+    {
+        return ReceiptItem::query()
+            ->where('container_id', $containerId)
+            ->distinct()
+            ->pluck('product_id')
+            ->map(fn ($id) => (int) $id)
+            ->unique()
+            ->values()
+            ->all();
     }
 }

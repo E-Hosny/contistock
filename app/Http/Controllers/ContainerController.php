@@ -9,6 +9,7 @@ use App\Models\Product;
 use App\Models\ReceiptItem;
 use App\Models\Supplier;
 use App\Services\ContainerSalesSummaryService;
+use App\Services\StockService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -17,7 +18,8 @@ use Inertia\Response;
 class ContainerController extends Controller
 {
     public function __construct(
-        protected ContainerSalesSummaryService $containerSalesSummaryService
+        protected ContainerSalesSummaryService $containerSalesSummaryService,
+        protected StockService $stockService
     ) {}
 
     public function index(Request $request): Response
@@ -69,6 +71,7 @@ class ContainerController extends Controller
         $container->append(['paid_amount', 'remaining_amount']);
 
         $salesWorkspace = $this->containerSalesSummaryService->forContainer($container);
+        $stockSummary = $this->containerStockSummary($container);
 
         return Inertia::render('Containers/Show', [
             'container' => $container,
@@ -78,12 +81,60 @@ class ContainerController extends Controller
                 'remaining' => (float) $container->remaining_amount,
             ],
             'salesCard' => $salesWorkspace['summary'],
+            'stockCard' => $stockSummary,
             'canReceiveToWarehouse' => $container->canEditPurchasePlan()
                 && ReceiptItem::query()
                     ->where('container_id', $container->id)
                     ->whereNull('warehouse_receipt_id')
                     ->exists(),
         ]);
+    }
+
+    public function stock(Container $container): Response
+    {
+        $this->authorize('view', $container);
+
+        $container->load('supplier');
+
+        $productIds = $this->stockService->productIdsLinkedToContainer((int) $container->id);
+        $stockRows = [];
+        if ($productIds !== []) {
+            foreach (Product::query()->whereIn('id', $productIds)->orderBy('name')->get() as $product) {
+                $qty = $this->stockService->availableQty((int) $product->id, (int) $container->id);
+                $stockRows[] = [
+                    'product' => $product,
+                    'available_qty' => $qty,
+                ];
+            }
+        }
+
+        return Inertia::render('Containers/Stock', [
+            'container' => $container,
+            'stock' => $stockRows,
+        ]);
+    }
+
+    /**
+     * @return array{skus_with_qty: int, total_available_qty: float}
+     */
+    protected function containerStockSummary(Container $container): array
+    {
+        $skusWithQty = 0;
+        $totalQty = 0.0;
+        $containerId = (int) $container->id;
+
+        foreach ($this->stockService->productIdsLinkedToContainer((int) $container->id) as $productId) {
+            $qty = $this->stockService->availableQty($productId, $containerId);
+            if ($qty > 0.000001) {
+                $skusWithQty++;
+            }
+            $totalQty += $qty;
+        }
+
+        return [
+            'skus_with_qty' => $skusWithQty,
+            'total_available_qty' => round($totalQty, 2),
+        ];
     }
 
     public function purchases(Container $container): Response
